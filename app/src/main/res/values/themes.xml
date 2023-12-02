@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.KaizenTranspo" parent="Base.Theme.KaizenTranspo" />
+
+    <style name="Theme.KaizenTranspo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.KaizenTranspo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.KaizenTranspo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
