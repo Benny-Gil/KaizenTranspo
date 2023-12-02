@@ -2,33 +2,35 @@ package com.example.kaizentranspo.classees;
 
 /**
  * Bus class represents a bus
- * It contains bus number, destination, status, seats occupied, and seats available
+ * It contains bus number, destination, and seats
  */
 public class Bus {
     private String busNumber;
     private String destination;
-    private String status;
-    private int seatsOccupied;
-    private int seatsAvailable;
+    private static final int TOTAL_SEATS = 49;
+    private boolean[] seats;
+
 
     /**
-     * Constructor for Bus class
-     * @param busNumber bus number
+     * Constructor for BusTicketing.Bus class
+     *
+     * @param busNumber   bus number
      * @param destination destination
-     * @param status status
-     * @param seatsOccupied seats occupied
-     * @param seatsAvailable seats available
      */
-    public Bus(String busNumber, String destination, String status, int seatsOccupied, int seatsAvailable) {
+    public Bus(String busNumber, String destination) {
         this.busNumber = busNumber;
         this.destination = destination;
-        this.status = status;
-        this.seatsOccupied = seatsOccupied;
-        this.seatsAvailable = seatsAvailable;
+
+        seats = new boolean[TOTAL_SEATS];
+        for (int i = 0; i < TOTAL_SEATS; i++) {
+            seats[i] = true;
+        }
+
     }
 
     /**
      * Getter for bus number
+     *
      * @return bus number
      */
     public String getBusNumber() {
@@ -37,6 +39,7 @@ public class Bus {
 
     /**
      * Getter for destination
+     *
      * @return destination
      */
     public String getDestination() {
@@ -45,25 +48,77 @@ public class Bus {
 
     /**
      * Getter for status
-     * @return status
+     *
+     * @return total number of seats
      */
-    public String getStatus() {
-        return status;
+    public int getAvailableSeats() {
+        int count = 0;
+        for (boolean seat : seats) {
+            if (seat) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getBookedSeats() {
+        int count = 0;
+        for (boolean seat : seats) {
+            if (!seat) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
-     * Getter for seats occupied
-     * @return seats occupied
+     * Check if a seat with a given seat number is available
+     *
+     * @param seatNumber seat number
+     * @return true if seat is available, false otherwise
      */
-    public int getSeatsOccupied() {
-        return seatsOccupied;
+    public boolean isSeatAvailable(int seatNumber) {
+        if (seatNumber >= 1 && seatNumber <= TOTAL_SEATS) {
+            return seats[seatNumber - 1];
+        } else {
+            // Invalid seat number
+            return false;
+        }
     }
 
     /**
-     * Getter for seats available
-     * @return seats available
+     * Book a seat with a given seat number, It can only book a seat if it is available
+     *
+     * @param seatNumber seat number
      */
-    public int getSeatsAvailable() {
-        return seatsAvailable;
+    public void bookSeat(int seatNumber) {
+        if (seatNumber >= 1 && seatNumber <= TOTAL_SEATS && seats[seatNumber - 1] && isSeatAvailable(seatNumber)) {
+            seats[seatNumber - 1] = false; // Mark seat as booked
+        }
+    }
+
+    /**
+     * Display all the seats and their status
+     */
+    public void displaySeatStatus() {
+        //print 4 seats per row, and at the last line print 5 seats
+        for (int i = 0; i < TOTAL_SEATS; i++) {
+            if (i % 4 == 0) {
+                System.out.println();
+            }
+            System.out.printf("%s\t", seats[i] ? " " : "x");
+        }
+        System.out.println();
+    }
+
+    /**
+     * Cancel a seat with a given seat number, It can only cancel a seat if it is booked
+     *
+     * @param seatNumber seat number
+     */
+    public void cancelSeat(int seatNumber) {
+        if (seatNumber >= 1 && seatNumber <= TOTAL_SEATS && !seats[seatNumber - 1] && !isSeatAvailable(seatNumber)) {
+            seats[seatNumber - 1] = true; // Mark seat as booked
+        }
     }
 }
