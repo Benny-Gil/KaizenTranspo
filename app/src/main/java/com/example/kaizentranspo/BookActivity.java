@@ -16,6 +16,8 @@ import android.view.View;
 import com.example.kaizentranspo.ui.main.SectionsPagerAdapter;
 import com.example.kaizentranspo.databinding.ActivityBookBinding;
 
+import java.util.Objects;
+
 public class BookActivity extends AppCompatActivity {
 
     private ActivityBookBinding binding;
@@ -32,6 +34,9 @@ public class BookActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+        //how to change tab names
+        tabs.getTabAt(0).setText("Book");
+        tabs.getTabAt(1).setText("My Tickets");
         FloatingActionButton fab = binding.fab;
 
         fab.setOnClickListener(new View.OnClickListener() {

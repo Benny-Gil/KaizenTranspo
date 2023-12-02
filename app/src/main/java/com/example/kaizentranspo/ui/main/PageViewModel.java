@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel;
 public class PageViewModel extends ViewModel {
 
     private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
-    private LiveData<String> mText = map(mIndex, input -> "Hello world from section: " + input);
+    private LiveData<String> mText = map(mIndex, input -> "Book a ticket here: " );
 
     public void setIndex(int index) {
         mIndex.setValue(index);
