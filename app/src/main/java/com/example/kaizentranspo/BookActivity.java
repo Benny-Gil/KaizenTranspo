@@ -1,5 +1,6 @@
 package com.example.kaizentranspo;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,12 +39,13 @@ public class BookActivity extends AppCompatActivity {
         tabs.getTabAt(0).setText("Book");
         tabs.getTabAt(1).setText("My Tickets");
         FloatingActionButton fab = binding.fab;
-
+        Intent intent = new Intent(BookActivity.this, SeatSelection.class);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                startActivity(intent);
             }
         });
     }
