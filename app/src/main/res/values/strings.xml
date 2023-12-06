@@ -19,4 +19,7 @@
     <string name="username_string">Username</string>
     <string name="password_string">Password</string>
     <string name="or_string">OR</string>
+    <string name="getStartedString">Get Started</string>
+    <string name="usernameString">User Name</string>
+    <string name="welcomeString">Welcome, </string>
 </resources>
