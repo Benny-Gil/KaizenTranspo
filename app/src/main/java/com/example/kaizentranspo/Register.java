@@ -19,12 +19,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
     TextInputEditText editTextEmail,editTextPassword;
     Button buttonReg;
     FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
     ProgressBar progressBar;
     TextView textView;
     public void onStart() {
@@ -42,11 +48,13 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth=FirebaseAuth.getInstance();
+        fStore=FirebaseFirestore.getInstance();
         editTextEmail=findViewById(R.id.email);
         editTextPassword=findViewById(R.id.password);
         buttonReg=findViewById(R.id.RegisterButton);
         progressBar=findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
+
         textView.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
@@ -64,7 +72,6 @@ public class Register extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);  // Hide progress bar
                 return;
             }
-
             if (TextUtils.isEmpty(password)) {
                 Toast.makeText(Register.this, "Enter Password", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);  // Hide progress bar
@@ -77,8 +84,17 @@ public class Register extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             // User creation successful
+                            FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(Register.this, "Account Created.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+                            DocumentReference documentReference=fStore.collection("Users").document(user.getUid());
+                            Map<String,Object> userInfo = new HashMap<>();
+                            userInfo.put("Email",email);
+
+                            userInfo.put("isUser","1");
+
+                            documentReference.set(userInfo);
+
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
                             startActivity(intent);
                             finish();
                         } else {
