@@ -2,6 +2,7 @@ package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,8 @@ public class SeatSelection extends AppCompatActivity {
             public void onClick(View v) {
                 if (lastClickedButton != null) {
                     System.out.println("Seat" + lastClickedButton.getText() + "");
+                    Intent intent=new Intent(getApplicationContext(), Receipt.class);
+                    startActivity(intent);
                 }
             }
         });
