@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
-    TextInputEditText editTextEmail,editTextPassword;
+   EditText editTextEmail,editTextPassword;
     Button buttonLogin;
     Button buttonRegister;
     FirebaseAuth mAuth;
@@ -56,7 +57,7 @@ public class Login extends AppCompatActivity {
         buttonLogin=findViewById(R.id.loginButton);
         buttonRegister = findViewById(R.id.registerButton);
 
-        textView.setOnClickListener(v -> {
+        buttonRegister.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Register.class);
             startActivity(intent);
             finish();

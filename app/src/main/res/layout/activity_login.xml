@@ -151,12 +151,6 @@
                         android:textColor="@color/white"
                         android:textSize="24sp" />
 
-
-
-
-
-
-
                     <TextView android:id="@+id/or"
                         android:layout_gravity="center_horizontal|center"
                         android:gravity="center"
