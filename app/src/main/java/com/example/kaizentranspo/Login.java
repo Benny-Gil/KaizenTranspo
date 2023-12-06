@@ -78,12 +78,6 @@ public class Login extends AppCompatActivity {
             checkUserAccessLevel(authResult.getUser().getUid());
             }).addOnFailureListener(e -> Toast.makeText(Login.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show());
 
-
-
-
-
-
-
                     });
 
 
