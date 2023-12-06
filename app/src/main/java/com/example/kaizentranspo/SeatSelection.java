@@ -5,17 +5,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class SeatSelection extends AppCompatActivity {
 
     private Button lastClickedButton;
     private Button bookButton;
+    private String price;
+    private String destinationText;
+    private String departureTime;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_selection);
         seats();
+
+        /**STUBS*/
+        price = "₱8669";
+        TextView priceUI = findViewById(R.id.price);
+        priceUI.setText(price);
+
+        destinationText = "Manila";
+        TextView destination = findViewById(R.id.destination);
+        destination.setText(destinationText);
+
+        departureTime = "1:13 PM";
+        TextView time =  findViewById(R.id.departureTime);
+        time.setText(departureTime);
+
+        date = "12/13/2023";
+        TextView dateUI = findViewById(R.id.date);
+        dateUI.setText(date);
+        /**STUBS*/
+
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
