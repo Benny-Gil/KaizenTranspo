@@ -1,8 +1,8 @@
 package com.example.kaizentranspo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,10 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +26,7 @@ public class Register extends AppCompatActivity {
 
     TextInputEditText editTextEmail,editTextPassword;
     Button buttonReg;
+    Button buttonLogin;
     FirebaseAuth mAuth;
     FirebaseFirestore fStore;
     ProgressBar progressBar;
@@ -42,6 +40,7 @@ public class Register extends AppCompatActivity {
             finish();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +48,13 @@ public class Register extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
         fStore=FirebaseFirestore.getInstance();
-        editTextEmail=findViewById(R.id.email);
-        editTextPassword=findViewById(R.id.password);
-        buttonReg=findViewById(R.id.RegisterButton);
-        progressBar=findViewById(R.id.progressBar);
-        textView = findViewById(R.id.loginNow);
+        editTextEmail=findViewById(R.id.registerUsername);
+        editTextPassword=findViewById(R.id.registerPassword);
+        buttonReg=findViewById(R.id.registerButton);
+        buttonLogin=findViewById(R.id.loginButton);
+        //progressBar=findViewById(R.id.progressBar);
 
-        textView.setOnClickListener(v -> {
+        buttonLogin.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
