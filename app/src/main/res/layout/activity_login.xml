@@ -125,11 +125,12 @@
                     >
 
                     <Button
-                        android:background="@drawable/rectangle1"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="101dp"
+                        android:id="@+id/buttonRegister"
                         android:layout_width="262dp"
                         android:layout_height="55dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="101dp"
+                        android:background="@drawable/rectangle1"
                         android:gravity="center"
                         android:shadowColor="#000000"
                         android:shadowDx="0"
@@ -137,24 +138,23 @@
                         android:shadowRadius="4"
                         android:text="@string/register_string"
                         android:textColor="@color/white"
-                        android:textSize="24sp"
 
-                        />
+                        android:textSize="24sp" />
 
                     <Button
-                        android:layout_marginStart="35dp"
-                        android:layout_marginTop="0dp"
+                        android:id="@+id/buttonLogin"
                         android:layout_width="262dp"
                         android:layout_height="55dp"
+                        android:layout_marginStart="35dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/rectangle2"
-                        android:textSize="24sp"
-                        android:shadowRadius="4"
                         android:shadowColor="#000000"
                         android:shadowDx="0"
                         android:shadowDy="4"
-                        android:textColor="@color/white"
+                        android:shadowRadius="4"
                         android:text="@string/log_in_string"
-                        />
+                        android:textColor="@color/white"
+                        android:textSize="24sp" />
 
 
 

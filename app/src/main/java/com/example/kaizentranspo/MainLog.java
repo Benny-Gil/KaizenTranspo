@@ -15,8 +15,8 @@ public class MainLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_log);
 
-        buttonLogin = findViewById(R.id.loginButton);
-        buttonRegister = findViewById(R.id.registerButton);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        buttonRegister = findViewById(R.id.buttonRegister);
 
         buttonLogin.setOnClickListener(v -> {
 

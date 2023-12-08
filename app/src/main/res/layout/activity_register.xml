@@ -127,7 +127,7 @@
                     >
 
                     <Button
-                        android:id="@+id/registerButton"
+                        android:id="@+id/buttonRegister"
                         android:background="@drawable/rectangle1"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="101dp"
@@ -145,7 +145,7 @@
                         />
 
                     <Button
-                        android:id="@+id/loginButton"
+                        android:id="@+id/buttonLogin"
                         android:layout_marginStart="35dp"
                         android:layout_marginTop="0dp"
                         android:layout_width="262dp"

@@ -2,7 +2,6 @@ package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,8 +49,8 @@ public class Register extends AppCompatActivity {
         fStore=FirebaseFirestore.getInstance();
         editTextEmail=findViewById(R.id.registerUsername);
         editTextPassword=findViewById(R.id.registerPassword);
-        buttonReg=findViewById(R.id.registerButton);
-        buttonLogin=findViewById(R.id.loginButton);
+        buttonReg=findViewById(R.id.buttonRegister);
+        buttonLogin=findViewById(R.id.buttonLogin);
         //progressBar=findViewById(R.id.progressBar);
 
         buttonLogin.setOnClickListener(v -> {
