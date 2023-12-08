@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "655487501205",
+    "firebase_url": "https://kaizentranspo-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "kaizentranspo",
+    "storage_bucket": "kaizentranspo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655487501205:android:4da1692bca9a3777b66c9c",
+        "android_client_info": {
+          "package_name": "com.example.kaizentranspo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWyOjgDFoQYN08aiZPsS5hxzD85pUK_UQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

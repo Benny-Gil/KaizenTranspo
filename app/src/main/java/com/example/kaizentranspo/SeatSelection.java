@@ -2,25 +2,65 @@ package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class SeatSelection extends AppCompatActivity {
+
     private Button lastClickedButton;
     private Button bookButton;
+    private String price;
+    private String destinationText;
+    private String departure;
+    private String selectedSeat;
+    private String busNumber;
+
+    ArrayList<TicketList> ticket = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_selection);
         seats();
+
+        price = getIntent().getStringExtra("Price");
+        TextView priceUI = findViewById(R.id.price);
+        priceUI.setText(price);
+
+        destinationText = getIntent().getStringExtra("Destination");
+
+        TextView destination = findViewById(R.id.destination);
+        destination.setText(destinationText);
+
+        departure = getIntent().getStringExtra("Departure Time");
+        TextView time =  findViewById(R.id.departureTime);
+        time.setText("Departure Time: "+departure);
+
+        busNumber = getIntent().getStringExtra("Bus Number");
+        TextView num = findViewById(R.id.bus_num_selection);
+        num.setText(busNumber);
+
+        TicketList newTicket = new TicketList(selectedSeat, destinationText, departure, busNumber);
+        ticket.add(newTicket);
+
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (lastClickedButton != null) {
-                    System.out.println("Seat" + lastClickedButton.getText() + "");
+                    selectedSeat = ("Seat #" + lastClickedButton.getText());
+                    Intent intent=new Intent(getApplicationContext(), Receipt.class);
+                    intent.putExtra("selectedSeat",selectedSeat);
+                    intent.putExtra("Destination", destinationText);
+                    intent.putExtra("Departure Time", departure);
+                    intent.putExtra("Price", price);
+                    intent.putExtra("Bus Number", busNumber);
+                    startActivity(intent);
                 }
             }
         });
