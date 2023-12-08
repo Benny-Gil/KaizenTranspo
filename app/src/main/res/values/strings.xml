@@ -44,14 +44,14 @@
     </string-array>
 
     <string-array name="price">
-        <item>869</item>
-        <item>250</item>
-        <item>869</item>
-        <item>250</item>
-        <item>869</item>
-        <item>250</item>
-        <item>869</item>
-        <item>250</item>
+        <item>₱869</item>
+        <item>₱250</item>
+        <item>₱869</item>
+        <item>₱250</item>
+        <item>₱869</item>
+        <item>₱250</item>
+        <item>₱869</item>
+        <item>₱250</item>
     </string-array>
 
     <string-array name="time">

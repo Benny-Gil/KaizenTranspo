@@ -109,6 +109,7 @@
         android:background="@drawable/book_button_gradient"
         android:text="Book"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
