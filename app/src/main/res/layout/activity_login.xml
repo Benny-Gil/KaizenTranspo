@@ -67,14 +67,19 @@
 
                     <EditText
                         android:id="@+id/registerUsername"
+                        android:layout_gravity="center_horizontal|center"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/welcome_back_color"
+                        android:layout_marginLeft="30dp"
                         android:layout_width="211.4dp"
                         android:layout_height="48dp"
-                        android:layout_gravity="center_horizontal|center"
-                        android:layout_marginLeft="30dp"
-                        android:gravity="center"
-                        android:hint="Enter username"
-                        android:textColor="@color/welcome_back_color"
-                        android:textSize="14sp" />
+                        android:hint="Enter username" />
+
+
+
+
+
 
 
                 </RelativeLayout>
@@ -120,12 +125,11 @@
                     >
 
                     <Button
-                        android:id="@+id/registerButton"
-                        android:layout_width="265dp"
-                        android:layout_height="55dp"
+                        android:background="@drawable/rectangle1"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="101dp"
-                        android:background="@drawable/rectangle1"
+                        android:layout_width="262dp"
+                        android:layout_height="55dp"
                         android:gravity="center"
                         android:shadowColor="#000000"
                         android:shadowDx="0"
@@ -133,23 +137,30 @@
                         android:shadowRadius="4"
                         android:text="@string/register_string"
                         android:textColor="@color/white"
+                        android:textSize="24sp"
 
-                        android:textSize="24sp" />
+                        />
 
                     <Button
-                        android:id="@+id/loginButton"
-                        android:layout_width="262dp"
-                        android:layout_height="55dp"
                         android:layout_marginStart="35dp"
                         android:layout_marginTop="0dp"
+                        android:layout_width="262dp"
+                        android:layout_height="55dp"
                         android:background="@drawable/rectangle2"
+                        android:textSize="24sp"
+                        android:shadowRadius="4"
                         android:shadowColor="#000000"
                         android:shadowDx="0"
                         android:shadowDy="4"
-                        android:shadowRadius="4"
-                        android:text="@string/log_in_string"
                         android:textColor="@color/white"
-                        android:textSize="24sp" />
+                        android:text="@string/log_in_string"
+                        />
+
+
+
+
+
+
 
                     <TextView android:id="@+id/or"
                         android:layout_gravity="center_horizontal|center"

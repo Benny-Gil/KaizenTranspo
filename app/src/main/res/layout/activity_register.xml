@@ -18,12 +18,6 @@
                 android:layout_height="wrap_content"
                 >
 
-                <View   android:id="@+id/_bg__login_ek2"
-                    android:background="@drawable/_bg__login_ek2_shape"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_width="360dp"
-                    android:layout_height="640dp" />
 
                 <ImageView android:id="@+id/wallpaper_1"
                     android:src="@drawable/wallpaper1"
@@ -61,16 +55,10 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <View   android:id="@+id/_bg__group_1_ek1"
-                        android:background="@drawable/_bg__group_1_ek1_shape"
-                        android:layout_marginStart="-46dp"
-                        android:layout_marginTop="-284dp"
-                        android:layout_width="275dp"
-                        android:layout_height="35.06dp" />
 
 
 
-                    <ImageView android:id="@+id/user_profile_icon_profile_avatar_user_icon_male_icon_face_icon_profile_icon_free_png_1"
+                    <ImageView android:id="@+id/userIcon"
                         android:src="@drawable/usericon"
                         android:contentDescription="user_profile_icon_profile_avatar_user_icon_male_icon_face_icon_profile_icon_free_png_1"
                         android:layout_marginStart="0dp"
@@ -105,14 +93,9 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <View   android:id="@+id/_bg__group_2_ek1"
-                        android:background="@drawable/_bg__group_2_ek1_shape"
-                        android:layout_marginStart="-46dp"
-                        android:layout_marginTop="-334dp"
-                        android:layout_width="275dp"
-                        android:layout_height="37.06dp" />
 
-                    <ImageView android:id="@+id/login_page_password_1"
+
+                    <ImageView android:id="@+id/passwordIcon"
                         android:src="@drawable/passwordicon"
                         android:contentDescription="login_page_password_1"
                         android:layout_marginStart="0dp"
@@ -145,10 +128,10 @@
 
                     <Button
                         android:id="@+id/registerButton"
-                        android:background="@drawable/rectangle_1_shape"
+                        android:background="@drawable/rectangle1"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="101dp"
-                        android:layout_width="265dp"
+                        android:layout_width="262dp"
                         android:layout_height="55dp"
                         android:gravity="center"
                         android:shadowColor="#000000"
@@ -167,7 +150,7 @@
                         android:layout_marginTop="0dp"
                         android:layout_width="262dp"
                         android:layout_height="55dp"
-                        android:background="@drawable/rectangle_2_shape"
+                        android:background="@drawable/rectangle2"
                         android:textSize="24sp"
                         android:shadowRadius="4"
                         android:shadowColor="#000000"
