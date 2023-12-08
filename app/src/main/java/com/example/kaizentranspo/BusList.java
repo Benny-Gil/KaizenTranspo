@@ -7,13 +7,11 @@ public class BusList {
     private String busNumber;
     private String price;
 
-
     public BusList(String destination, String time, String busNumber, String price) {
         this.destination = destination;
         this.time = time;
         this.busNumber = busNumber;
         this.price = price;
-
     }
 
     public String getDestination() {
