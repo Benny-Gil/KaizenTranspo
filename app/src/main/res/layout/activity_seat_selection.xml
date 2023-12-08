@@ -48,10 +48,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:text="Baguio"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
@@ -60,10 +61,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:text="Destination"
         android:textColor="#FDFDFD"
-        android:textSize="16sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
@@ -71,10 +73,11 @@
         android:id="@+id/departureTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="40dp"
         android:text="2:00 PM"
         android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
@@ -133,7 +136,7 @@
                 android:id="@+id/seat1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/available_seat"
                 android:text="1"
                 android:textColor="#FFFFFF"
@@ -142,7 +145,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintHorizontal_bias="0.545"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/bus_num_selection" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/seat5"
@@ -727,7 +730,7 @@
                 android:id="@+id/seat47"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="716dp"
+                android:layout_marginTop="768dp"
                 android:background="@drawable/available_seat"
                 android:text="47"
                 android:textColor="#FFFFFF"
@@ -851,7 +854,7 @@
                 android:id="@+id/seat2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/available_seat"
                 android:text="2"
                 android:textColor="#FFFFFF"
@@ -859,13 +862,13 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/bus_num_selection" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/seat3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/available_seat"
                 android:text="3"
                 android:textColor="#FFFFFF"
@@ -873,13 +876,13 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/bus_num_selection" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/seat4"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/available_seat"
                 android:text="4"
                 android:textColor="#FFFFFF"
@@ -887,7 +890,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/bus_num_selection"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -934,7 +937,7 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="350dp"
-                android:layout_height="800dp"
+                android:layout_height="840dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/seatholder"
                 android:elevation="0dp"
@@ -1010,6 +1013,24 @@
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView2" />
 
+            <TextView
+                android:id="@+id/bus_num_selection"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/available_seat"
+                android:gravity="center"
+                android:text="Bus Number"
+                android:textColor="#646B6C"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
@@ -1033,17 +1054,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
-        android:text="12/13/2023"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

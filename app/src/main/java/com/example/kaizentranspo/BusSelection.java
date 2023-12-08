@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,11 +28,13 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Button ticketButton = findViewById(R.id.buttonTicket);
+
         ticketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Ticket.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

@@ -47,13 +47,12 @@ public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerVi
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+
         TextView destination, price, departureTime, busNumber;
 
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
-            //imageView = itemView.findViewById(R.id.imageView4);
             destination = itemView.findViewById(R.id.destination_recycleView);
             price = itemView.findViewById(R.id.price_recycleView);
             busNumber = itemView.findViewById(R.id.busNumber_recycleView);

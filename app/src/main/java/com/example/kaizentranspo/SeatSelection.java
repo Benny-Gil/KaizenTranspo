@@ -25,8 +25,6 @@ public class SeatSelection extends AppCompatActivity {
         setContentView(R.layout.activity_seat_selection);
         seats();
 
-
-
         price = getIntent().getStringExtra("Price");
         TextView priceUI = findViewById(R.id.price);
         priceUI.setText(price);
@@ -38,15 +36,11 @@ public class SeatSelection extends AppCompatActivity {
 
         departure = getIntent().getStringExtra("Departure Time");
         TextView time =  findViewById(R.id.departureTime);
-        time.setText(departure);
+        time.setText("Departure Time: "+departure);
 
         busNumber = getIntent().getStringExtra("Bus Number");
-
-
-
-        date = "12/13/2023";
-        TextView dateUI = findViewById(R.id.date);
-        dateUI.setText(date);
+        TextView num = findViewById(R.id.bus_num_selection);
+        num.setText(busNumber);
 
 
         bookButton = findViewById(R.id.bookButton);
@@ -91,9 +85,5 @@ public class SeatSelection extends AppCompatActivity {
             Button button = findViewById(resId);
             setButtonClickListener(button);
         }
-    }
-
-    public String getSelectedSeat() {
-        return selectedSeat;
     }
 }
