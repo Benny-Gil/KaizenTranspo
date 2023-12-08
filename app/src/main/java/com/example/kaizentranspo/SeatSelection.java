@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class SeatSelection extends AppCompatActivity {
 
     private Button lastClickedButton;
@@ -15,9 +17,10 @@ public class SeatSelection extends AppCompatActivity {
     private String price;
     private String destinationText;
     private String departure;
-    private String date;
     private String selectedSeat;
     private String busNumber;
+
+    ArrayList<TicketList> ticket = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class SeatSelection extends AppCompatActivity {
         TextView num = findViewById(R.id.bus_num_selection);
         num.setText(busNumber);
 
+        TicketList newTicket = new TicketList(selectedSeat, destinationText, departure, busNumber);
+        ticket.add(newTicket);
 
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {

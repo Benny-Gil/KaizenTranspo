@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class Receipt extends AppCompatActivity {
 
     @Override
@@ -23,9 +25,6 @@ public class Receipt extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.confirmButton);
         Button cancelButton = findViewById(R.id.cancelButton);
         TextView thanks = findViewById(R.id.thankyou);
-
-
-
 
         TextView seat = findViewById(R.id.seatNumber_receipt);
 
@@ -56,13 +55,28 @@ public class Receipt extends AppCompatActivity {
                 cancelButton.setVisibility(View.INVISIBLE);
                 confirmButton.setVisibility(View.INVISIBLE);
                 thanks.setVisibility(View.VISIBLE);
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(), Ticket.class);
+
+
+
+                        /**TO BE REMOVED*/
+
+                        intent.putExtra("Selected Seat", receivedData);
+                        intent.putExtra("Destination", destinationText);
+                        intent.putExtra("Departure Time", departure);
+                        intent.putExtra("Bus Number", busNumber);
+
+                        /**TO BE REMOVED*/
+
+
+
                         startActivity(intent);
                     }
-                }, 2000);
+                }, 1500);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {

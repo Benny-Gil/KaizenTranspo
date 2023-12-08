@@ -30,13 +30,12 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Receipt"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView19"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="@+id/textView19" />
 
@@ -263,16 +262,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancelButton"
-        android:layout_width="85dp"
-        android:layout_height="34dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/book_button_gradient"
-        android:text="Cancel"
+        android:text="X"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintHorizontal_bias="0.871"
+        app:layout_constraintStart_toEndOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/thankyou"

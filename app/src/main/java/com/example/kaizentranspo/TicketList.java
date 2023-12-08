@@ -1,19 +1,24 @@
 package com.example.kaizentranspo;
 
-public class BusList {
-
+public class TicketList {
     private String destination;
     private String time;
     private String busNumber;
-    private String price;
+    private String seatNumber;
 
-
-    public BusList(String destination, String time, String busNumber, String price) {
+    public TicketList(String destination, String time, String busNumber, String seatNumber) {
         this.destination = destination;
         this.time = time;
         this.busNumber = busNumber;
-        this.price = price;
+        this.seatNumber = seatNumber;
 
+    }
+
+    public TicketList() {
+        this.destination = destination;
+        this.time = time;
+        this.busNumber = busNumber;
+        this.seatNumber = seatNumber;
     }
 
     public String getDestination() {
@@ -28,7 +33,9 @@ public class BusList {
         return busNumber;
     }
 
-    public String getPrice() {
-        return price;
+    public String getSeatNumber() {
+        return seatNumber;
     }
+
+
 }
