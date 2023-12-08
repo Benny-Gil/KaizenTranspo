@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/textView19"
-        android:layout_width="348dp"
-        android:layout_height="598dp"
+        android:layout_width="342dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/booking_background"
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -20,11 +22,10 @@
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="202dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/logowithname" />
+        android:background="@drawable/logowithname" />
 
 
     <!-- BUS CONTAINER , TO BE EDITED TO BE USABLE -->
@@ -46,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/busContainer2"
         app:layout_constraintStart_toStartOf="@+id/busContainer2"
         app:layout_constraintTop_toTopOf="@+id/busContainer2"
-        tools:srcCompat="@drawable/bus" />
+        android:background="@drawable/bus" />
 
     <TextView
         android:id="@+id/textView9"

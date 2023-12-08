@@ -60,6 +60,10 @@ public class Login extends AppCompatActivity {
             finish();
         });
         buttonLogin.setOnClickListener(v -> {
+
+            //deleteeee
+            startActivity(new Intent(getApplicationContext(),BusSelection.class));
+
             progressBar.setVisibility(View.VISIBLE);
             String email,password;
             email=String.valueOf(editTextEmail.getText());

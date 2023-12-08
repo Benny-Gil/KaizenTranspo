@@ -17,14 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="197dp"
+        android:layout_width="276dp"
+        android:layout_height="195dp"
+        android:background="@drawable/logowithname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/logowithname" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
@@ -178,8 +180,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirmButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="49dp"
         android:background="@drawable/book_button_gradient"
         android:text="Confirm"
         android:textColor="@color/white"
@@ -260,6 +262,34 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
         app:layout_constraintStart_toEndOf="@+id/textView22"
         app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelButton"
+        android:layout_width="85dp"
+        android:layout_height="34dp"
+        android:background="@drawable/book_button_gradient"
+        android:text="Cancel"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/thankyou"
+        android:layout_width="314dp"
+        android:layout_height="447dp"
+        android:background="@drawable/booking_background"
+        android:gravity="center"
+        android:text="Thank You for Choosing KAIZEN TRANSPO! Have a nice day ahead"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/textView19"
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/textView19" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
