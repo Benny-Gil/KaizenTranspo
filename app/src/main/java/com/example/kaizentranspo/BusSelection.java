@@ -37,6 +37,9 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
     }
 
     private void setUpBus() {
+
+        /**Extracted data from strings.xml, if possible fetch data from database then store them here*/
+
         String[] busDestination = getResources().getStringArray(R.array.bus_destination);
         String[] busNumber = getResources().getStringArray(R.array.bus_number);
         String[] departureTime = getResources().getStringArray(R.array.time);
@@ -44,14 +47,18 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
 
         for (int i = 0; i < busDestination.length; i++) {
             bus.add(new BusList(busDestination[i],
-                    busNumber[i],
                     departureTime[i],
+                    busNumber[i],
                     price[i]));
         }
     }
     @Override
     public void onBusClick(int position) {
         Intent intent = new Intent(this, SeatSelection.class);
+        intent.putExtra("Destination", bus.get(position).getDestination());
+        intent.putExtra("Price", bus.get(position).getPrice());
+        intent.putExtra("Bus Number", bus.get(position).getBusNumber());
+        intent.putExtra("Departure Time", bus.get(position).getTime());
         startActivity(intent);
     }
 }

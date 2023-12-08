@@ -24,12 +24,12 @@
     <string-array name="bus_destination">
         <item>Manila</item>
         <item>La Union</item>
-        <item>Manila</item>
-        <item>La Union</item>
-        <item>Manila</item>
-        <item>La Union</item>
-        <item>Manila</item>
-        <item>La Union</item>
+        <item>Vigan</item>
+        <item>Davao</item>
+        <item>Bicol</item>
+        <item>Dagupan</item>
+        <item>Tarlac</item>
+        <item>Subic</item>
     </string-array>
 
     <string-array name="bus_number">
@@ -46,12 +46,12 @@
     <string-array name="price">
         <item>₱869</item>
         <item>₱250</item>
-        <item>₱869</item>
-        <item>₱250</item>
-        <item>₱869</item>
-        <item>₱250</item>
-        <item>₱869</item>
-        <item>₱250</item>
+        <item>₱1250</item>
+        <item>₱3000</item>
+        <item>₱1890</item>
+        <item>₱150</item>
+        <item>₱300</item>
+        <item>₱780</item>
     </string-array>
 
     <string-array name="time">

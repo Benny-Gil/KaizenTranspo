@@ -14,8 +14,10 @@ public class SeatSelection extends AppCompatActivity {
     private Button bookButton;
     private String price;
     private String destinationText;
-    private String departureTime;
+    private String departure;
     private String date;
+    private String selectedSeat;
+    private String busNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,31 +25,42 @@ public class SeatSelection extends AppCompatActivity {
         setContentView(R.layout.activity_seat_selection);
         seats();
 
-        /**STUBS*/
-        price = "₱8669";
+
+
+        price = getIntent().getStringExtra("Price");
         TextView priceUI = findViewById(R.id.price);
         priceUI.setText(price);
 
-        destinationText = "Manila";
+        destinationText = getIntent().getStringExtra("Destination");
+
         TextView destination = findViewById(R.id.destination);
         destination.setText(destinationText);
 
-        departureTime = "1:13 PM";
+        departure = getIntent().getStringExtra("Departure Time");
         TextView time =  findViewById(R.id.departureTime);
-        time.setText(departureTime);
+        time.setText(departure);
+
+        busNumber = getIntent().getStringExtra("Bus Number");
+
+
 
         date = "12/13/2023";
         TextView dateUI = findViewById(R.id.date);
         dateUI.setText(date);
-        /**STUBS*/
+
 
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (lastClickedButton != null) {
-                    System.out.println("Seat" + lastClickedButton.getText() + "");
+                    selectedSeat = ("Seat #" + lastClickedButton.getText());
                     Intent intent=new Intent(getApplicationContext(), Receipt.class);
+                    intent.putExtra("selectedSeat",selectedSeat);
+                    intent.putExtra("Destination", destinationText);
+                    intent.putExtra("Departure Time", departure);
+                    intent.putExtra("Price", price);
+                    intent.putExtra("Bus Number", busNumber);
                     startActivity(intent);
                 }
             }
@@ -80,4 +93,7 @@ public class SeatSelection extends AppCompatActivity {
         }
     }
 
+    public String getSelectedSeat() {
+        return selectedSeat;
+    }
 }
