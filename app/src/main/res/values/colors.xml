@@ -13,9 +13,6 @@
 	<color name="white">#FFFFFFFF</color>
 
 	<color name="blacker">#000000</color>
-	<color name="seamless_journeys__effortless_booking__color">#872A90</color>
-	<color name="purple">#9D8CB8</color>
-
-	<color name="_bg__login_ek2_color">#FFFFFF</color>
-	<color name="rectangle_1_color">#9D8CB8</color>
+	<color name="purple">#872A90</color>
+	<color name="lavender">#9D8CB8</color>
 </resources>
