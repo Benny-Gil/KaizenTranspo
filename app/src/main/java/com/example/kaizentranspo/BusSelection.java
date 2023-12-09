@@ -38,6 +38,7 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
             }
         });
     }
+
     private void setUpBus() {
 
         /**Extracted data from strings.xml, if possible fetch data from database then store them here*/
