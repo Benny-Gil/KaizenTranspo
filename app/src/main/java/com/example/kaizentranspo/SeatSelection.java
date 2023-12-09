@@ -20,50 +20,50 @@ public class SeatSelection extends AppCompatActivity {
     private String selectedSeat;
     private String busNumber;
 
-    ArrayList<TicketList> ticket = new ArrayList<>();
+    ArrayList<Integer> bookedSeatNumbers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_selection);
+
+
+        getBookedSeatNumbersFromDatabase();
         seats();
+
 
         price = getIntent().getStringExtra("Price");
         TextView priceUI = findViewById(R.id.price);
         priceUI.setText(price);
-
         destinationText = getIntent().getStringExtra("Destination");
-
         TextView destination = findViewById(R.id.destination);
         destination.setText(destinationText);
-
         departure = getIntent().getStringExtra("Departure Time");
         TextView time =  findViewById(R.id.departureTime);
         time.setText("Departure Time: "+departure);
-
         busNumber = getIntent().getStringExtra("Bus Number");
         TextView num = findViewById(R.id.bus_num_selection);
         num.setText(busNumber);
-
-        TicketList newTicket = new TicketList(selectedSeat, destinationText, departure, busNumber);
-        ticket.add(newTicket);
 
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (lastClickedButton != null) {
-                    selectedSeat = ("Seat #" + lastClickedButton.getText());
+                    selectedSeat = (String) lastClickedButton.getText();
                     Intent intent=new Intent(getApplicationContext(), Receipt.class);
+
                     intent.putExtra("selectedSeat",selectedSeat);
                     intent.putExtra("Destination", destinationText);
                     intent.putExtra("Departure Time", departure);
                     intent.putExtra("Price", price);
                     intent.putExtra("Bus Number", busNumber);
+
                     startActivity(intent);
                 }
             }
         });
+
     }
 
     private void setButtonClickListener(final Button button) {
@@ -89,6 +89,19 @@ public class SeatSelection extends AppCompatActivity {
             int resId = getResources().getIdentifier("seat" + i, "id", getPackageName());
             Button button = findViewById(resId);
             setButtonClickListener(button);
+            if (bookedSeatNumbers.contains(i)) {
+                button.setBackgroundResource(R.drawable.booked_seat);
+                button.setOnClickListener(null);
+            }
+        }
+    }
+    private void getBookedSeatNumbersFromDatabase() {
+
+        /**Just change the data*/
+        int[] booked = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,20,25,30,45};
+
+        for (int seatNumber : booked) {
+            bookedSeatNumbers.add(seatNumber);
         }
     }
 }
