@@ -19,7 +19,49 @@
     <string name="username_string">Username</string>
     <string name="password_string">Password</string>
     <string name="or_string">OR</string>
-    <string name="getStartedString">Get Started</string>
-    <string name="usernameString">User Name</string>
-    <string name="welcomeString">Welcome, </string>
+
+
+    <string-array name="bus_destination">
+        <item>Manila</item>
+        <item>La Union</item>
+        <item>Vigan</item>
+        <item>Davao</item>
+        <item>Bicol</item>
+        <item>Dagupan</item>
+        <item>Tarlac</item>
+        <item>Subic</item>
+    </string-array>
+
+    <string-array name="bus_number">
+        <item>Bus #123</item>
+        <item>Bus #456</item>
+        <item>Bus #789</item>
+        <item>Bus #690</item>
+        <item>Bus #123</item>
+        <item>Bus #456</item>
+        <item>Bus #789</item>
+        <item>Bus #690</item>
+    </string-array>
+
+    <string-array name="price">
+        <item>₱869</item>
+        <item>₱250</item>
+        <item>₱1250</item>
+        <item>₱3000</item>
+        <item>₱1890</item>
+        <item>₱150</item>
+        <item>₱300</item>
+        <item>₱780</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>9:00 AM</item>
+        <item>10:00 AM</item>
+        <item>12:00 PM</item>
+        <item>3:00 PM</item>
+        <item>9:00 AM</item>
+        <item>10:00 AM</item>
+        <item>12:00 PM</item>
+        <item>3:00 PM</item>
+    </string-array>
 </resources>
