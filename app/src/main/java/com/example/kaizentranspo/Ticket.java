@@ -26,4 +26,26 @@ public class Ticket extends AppCompatActivity {
             }
         });
     }
+
+    private void setTicket() {
+
+        /**fetch data from database then store them here-replace data for the arrays*/
+
+        //example only
+        String[] busDestination = {"HEllo",getIntent().getStringExtra("Destination")};
+        String[] busNumber = {"HEllo",getIntent().getStringExtra("Bus Number")};
+        String[] departureTime = {"HEllo",getIntent().getStringExtra("Departure Time")};
+        String[] seatNumber = {"Test",getIntent().getStringExtra("Selected Seat")};
+
+        for (int i = 0; i < seatNumber.length; i++) {
+            ticket.add(new TicketList(busDestination[i],
+                    departureTime[i],
+                    busNumber[i],
+                    seatNumber[i]));
+        }
+    }
+    @Override
+    public void onClick(int position) {
+
+    }
 }
