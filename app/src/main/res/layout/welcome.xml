@@ -1,21 +1,16 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="wrap_content" >
-
-    <ScrollView android:id="@+id/welcome_page"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
-
-        <RelativeLayout android:id="@+id/content_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 
             <RelativeLayout android:id="@+id/page_welcome_page_ek1"
                 android:layout_marginTop="0dp"
                 android:layout_marginStart="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 >
 
 
@@ -25,73 +20,84 @@
                     android:contentDescription="wallpaper_1"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
-                    android:layout_width="360dp"
-                    android:layout_height="640dp" />
-
-
-                <RelativeLayout android:id="@+id/group_1"
-                    android:layout_marginTop="355dp"
-                    android:layout_marginStart="42dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    >
+                    android:scaleType="fitXY"/>
 
 
-                    <TextView android:id="@+id/welcomeMessage"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_horizontal|center"
-                        android:gravity="center"
-                        android:textSize="40sp"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="0dp"
+                <RelativeLayout
+                    android:id="@+id/group_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="355dp"
+                    android:layout_marginBottom="266dp">
+
+
+                    <TextView
+                        android:id="@+id/welcomeMessage"
                         android:layout_width="206dp"
                         android:layout_height="68dp"
+                        android:layout_gravity="center_horizontal|center"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
                         android:text="@string/welcomeString"
-                        />
+                        android:textColor="@color/black"
+                        app:autoSizeTextType="uniform"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"/>
 
                     <TextView
                         android:id="@+id/userName"
-                        android:textStyle="bold"
                         android:layout_width="284dp"
                         android:layout_height="68dp"
                         android:layout_gravity="center_horizontal|center"
-                        android:gravity="center"
-                        android:textSize="40sp"
-                        android:textColor="@android:color/black"
                         android:layout_marginLeft="-7dp"
-                        android:layout_marginTop="42dp"
-                        android:text="@string/usernameString"/>
+                        android:layout_marginTop="47dp"
+                        android:gravity="center"
+                        android:text="@string/usernameString"
+                        android:textColor="@android:color/black"
+                        app:autoSizeTextType="uniform"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"/>
 
                 </RelativeLayout>
 
-                <ImageView android:id="@+id/visual1"
-                    android:src="@drawable/visual1"
-                    android:contentDescription="visual1"
+                <ImageView
+                    android:id="@+id/visual1"
+                    android:layout_width="314dp"
+                    android:layout_height="259dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="74dp"
-                    android:layout_width="314dp"
-                    android:layout_height="259dp" />
+                    android:layout_marginBottom="398dp"
+                    android:contentDescription="visual1"
+                    android:src="@drawable/visual1" />
 
 
                 <Button
                     android:id="@+id/buttonPanel"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="517dp"
                     android:layout_width="262dp"
                     android:layout_height="55dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="517dp"
+                    android:layout_marginBottom="159dp"
                     android:background="@drawable/rectangle2"
-                    android:textSize="24sp"
-                    android:shadowRadius="4"
                     android:shadowColor="#000000"
                     android:shadowDx="0"
                     android:shadowDy="4"
-                    android:textColor="@color/white"
+                    android:shadowRadius="4"
                     android:text="@string/getStartedString"
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
 
             </RelativeLayout>
-        </RelativeLayout>
+</RelativeLayout>
 
-    </ScrollView>
-</HorizontalScrollView>
+
