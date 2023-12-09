@@ -81,7 +81,7 @@
                 android:layout_gravity="center_horizontal|center"
                 android:layout_marginLeft="30dp"
                 android:gravity="center"
-                android:hint="Enter username"
+                android:hint="Enter email"
                 android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
                 android:textSize="14sp" />
@@ -125,8 +125,12 @@
             android:layout_marginBottom="100dp">
 
             <!-- Register button -->
+
+            <!-- Login button -->
+
+            <!-- "Or" label -->
             <Button
-                android:id="@+id/buttonRegister"
+                android:id="@+id/buttonLogin"
                 android:layout_width="262dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="30dp"
@@ -137,13 +141,12 @@
                 android:shadowDx="0"
                 android:shadowDy="4"
                 android:shadowRadius="4"
-                android:text="@string/register_string"
+                android:text="@string/log_in_string"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
-            <!-- Login button -->
             <Button
-                android:id="@+id/buttonLogin"
+                android:id="@+id/buttonRegister"
                 android:layout_width="262dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="35dp"
@@ -153,11 +156,10 @@
                 android:shadowDx="0"
                 android:shadowDy="4"
                 android:shadowRadius="4"
-                android:text="@string/log_in_string"
+                android:text="@string/register_string"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
-            <!-- "Or" label -->
             <TextView
                 android:id="@+id/or"
                 android:layout_width="211.4dp"
@@ -190,6 +192,12 @@
                 android:layout_height="2dp" />
 
         </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 

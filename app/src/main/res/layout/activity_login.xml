@@ -79,7 +79,7 @@
                 android:layout_gravity="center_horizontal|center"
                 android:layout_marginLeft="30dp"
                 android:gravity="center"
-                android:hint="Enter username"
+                android:hint="Enter email"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
-
     EditText editTextEmail,editTextPassword;
     Button buttonReg;
     Button buttonLogin;
@@ -60,25 +59,25 @@ public class Register extends AppCompatActivity {
         });
 
         buttonReg.setOnClickListener(v -> {
-            progressBar.setVisibility(View.VISIBLE);
+            //progressBar.setVisibility(View.VISIBLE);
 
             String email = String.valueOf(editTextEmail.getText());
             String password = String.valueOf(editTextPassword.getText());
 
             if (TextUtils.isEmpty(email)) {
-                Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);  // Hide progress bar
+                Toast.makeText(Register.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                //progressBar.setVisibility(View.GONE);  // Hide progress bar
                 return;
             }
             if (TextUtils.isEmpty(password)) {
                 Toast.makeText(Register.this, "Enter Password", Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);  // Hide progress bar
+                //progressBar.setVisibility(View.GONE);  // Hide progress bar
                 return;
             }
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
-                        progressBar.setVisibility(View.GONE);
+                        //progressBar.setVisibility(View.GONE);
 
                         if (task.isSuccessful()) {
                             // User creation successful
