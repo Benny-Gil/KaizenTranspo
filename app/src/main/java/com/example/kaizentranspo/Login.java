@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     Button buttonLogin;
     Button buttonRegister;
     FirebaseAuth mAuth;
-    ProgressBar progressBar;
+
     TextView textView;
     FirebaseFirestore fStore;
     @Override
@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            Intent intent=new Intent(getApplicationContext(),BusSelection.class);
             startActivity(intent);
             finish();
         }
@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
             //deleteeee
             startActivity(new Intent(getApplicationContext(),BusSelection.class));
 
-            progressBar.setVisibility(View.VISIBLE);
+
             String email,password;
             email=String.valueOf(editTextEmail.getText());
             password=String.valueOf(editTextPassword.getText());
@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity {
                 finish();
             }
             if(documentSnapshot.getString("isUser")!=null){
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(),BusSelection.class));
                 finish();
             }
         });
