@@ -23,8 +23,6 @@ public class Login extends AppCompatActivity {
     Button buttonLogin;
     Button buttonRegister;
     FirebaseAuth mAuth;
-    ProgressBar progressBar;
-    TextView textView;
     FirebaseFirestore fStore;
     @Override
     public void onStart() {
@@ -56,9 +54,8 @@ public class Login extends AppCompatActivity {
         buttonLogin.setOnClickListener(v -> {
 
             //deleteeee
-            startActivity(new Intent(getApplicationContext(),BusSelection.class));
+            //startActivity(new Intent(getApplicationContext(),BusSelection.class));
 
-            progressBar.setVisibility(View.VISIBLE);
             String email,password;
             email=String.valueOf(editTextEmail.getText());
             password=String.valueOf(editTextPassword.getText());
