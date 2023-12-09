@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,78 +27,90 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
-    TextInputEditText editTextEmail,editTextPassword;
+    TextInputEditText editTextEmail, editTextPassword;
     Button buttonLogin;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
     FirebaseFirestore fStore;
+    Button adminLogin;
+
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        fStore=FirebaseFirestore.getInstance();
-        mAuth=FirebaseAuth.getInstance();
-        editTextEmail=findViewById(R.id.email);
-        editTextPassword=findViewById(R.id.password);
-        buttonLogin=findViewById(R.id.loginButton);
-        progressBar=findViewById(R.id.progressBar);
+        fStore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        editTextEmail = findViewById(R.id.email);
+        editTextPassword = findViewById(R.id.password);
+        buttonLogin = findViewById(R.id.loginButton);
+        progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.RegisterNow);
+        adminLogin = findViewById(R.id.adminLogin);
+
+        // Goes Register Activity
         textView.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Register.class);
             startActivity(intent);
             finish();
         });
-        buttonLogin.setOnClickListener(v -> {
 
+        // Goes to Admin Page
+        adminLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        buttonLogin.setOnClickListener(v -> {
             //deleteeee
-            startActivity(new Intent(getApplicationContext(),BusSelection.class));
+            startActivity(new Intent(getApplicationContext(), BusSelection.class));
 
             progressBar.setVisibility(View.VISIBLE);
-            String email,password;
-            email=String.valueOf(editTextEmail.getText());
-            password=String.valueOf(editTextPassword.getText());
+            String email, password;
+            email = String.valueOf(editTextEmail.getText());
+            password = String.valueOf(editTextPassword.getText());
 
-            if(TextUtils.isEmpty(email)){
-                Toast.makeText(Login.this,"Enter email",Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(TextUtils.isEmpty(password)){
-                Toast.makeText(Login.this,"Enter Password",Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
 
             }
             mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
-            Toast.makeText(Login.this,"Loggedin Successfully",Toast.LENGTH_SHORT).show();
-            checkUserAccessLevel(authResult.getUser().getUid());
+                Toast.makeText(Login.this, "Loggedin Successfully", Toast.LENGTH_SHORT).show();
+                checkUserAccessLevel(authResult.getUser().getUid());
             }).addOnFailureListener(e -> Toast.makeText(Login.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show());
-
-                    });
+        });
 
 
     }
 
     private void checkUserAccessLevel(String uid) {
-        DocumentReference documentReference= fStore.collection("Users").document(uid);
+        DocumentReference documentReference = fStore.collection("Users").document(uid);
         documentReference.get().addOnSuccessListener(documentSnapshot -> {
-            Log.d("Tag","onSuccess: " + documentSnapshot.getData());
+            Log.d("Tag", "onSuccess: " + documentSnapshot.getData());
 
-            if(documentSnapshot.getString("isAdmin") != null){
-                startActivity(new Intent(getApplicationContext(),AdminPage.class));
+            if (documentSnapshot.getString("isAdmin") != null) {
+                startActivity(new Intent(getApplicationContext(), AdminPage.class));
                 finish();
             }
-            if(documentSnapshot.getString("isUser")!=null){
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            if (documentSnapshot.getString("isUser") != null) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
         });

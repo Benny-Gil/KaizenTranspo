@@ -26,14 +26,14 @@ public class AdminPage extends AppCompatActivity {
         button=findViewById(R.id.logout);
         textView=findViewById(R.id.userDetails);
         user = auth.getCurrentUser();
-        if(user==null){
-            Intent intent = new Intent(getApplicationContext(), Login.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            textView.setText(user.getEmail());
-        }
+//        if(user==null){
+//            Intent intent = new Intent(getApplicationContext(), Login.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//        else {
+//            textView.setText(user.getEmail());
+//        }
         button.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), Login.class);

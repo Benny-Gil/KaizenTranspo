@@ -3,6 +3,7 @@
     <string name="title_activity_book">BookActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="admin_login">Admin Login</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
