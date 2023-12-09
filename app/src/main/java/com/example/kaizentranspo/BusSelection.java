@@ -27,21 +27,12 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        String destination = getIntent().getStringExtra("Destination");
-        String num = getIntent().getStringExtra("Bus Number");
-        String time = getIntent().getStringExtra("Departure Time");
-        String seatNum= getIntent().getStringExtra("Selected Seat");
-
         Button ticketButton = findViewById(R.id.buttonTicket);
 
         ticketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Ticket.class);
-                intent.putExtra("Selected Seat", seatNum);
-                intent.putExtra("Destination", destination);
-                intent.putExtra("Departure Time", time);
-                intent.putExtra("Bus Number", num);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -64,7 +55,7 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
         }
     }
     @Override
-    public void onClick(int position) {
+    public void onBusClick(int position) {
         Intent intent = new Intent(this, SeatSelection.class);
         intent.putExtra("Destination", bus.get(position).getDestination());
         intent.putExtra("Price", bus.get(position).getPrice());
