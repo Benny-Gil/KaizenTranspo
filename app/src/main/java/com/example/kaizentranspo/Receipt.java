@@ -18,14 +18,11 @@ public class Receipt extends AppCompatActivity {
         setContentView(R.layout.activity_receipt);
 
         Intent intent = getIntent();
-        String receivedData = intent.getStringExtra("selectedSeat");
+        String selectedSeat = intent.getStringExtra("selectedSeat");
 
         Button confirmButton = findViewById(R.id.confirmButton);
         Button cancelButton = findViewById(R.id.cancelButton);
         TextView thanks = findViewById(R.id.thankyou);
-
-
-
 
         TextView seat = findViewById(R.id.seatNumber_receipt);
 
@@ -46,7 +43,7 @@ public class Receipt extends AppCompatActivity {
         TextView busNum = findViewById(R.id.busNumber_receipt);
         busNum.setText(busNumber);
 
-        seat.setText(receivedData);
+        seat.setText("Seat #" +selectedSeat);
 
 
         thanks.setVisibility(View.INVISIBLE);
@@ -56,19 +53,35 @@ public class Receipt extends AppCompatActivity {
                 cancelButton.setVisibility(View.INVISIBLE);
                 confirmButton.setVisibility(View.INVISIBLE);
                 thanks.setVisibility(View.VISIBLE);
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(), Ticket.class);
+
+                        /**TO BE REMOVED*/
+
+                        intent.putExtra("Selected Seat", "Seat #"+selectedSeat);
+                        intent.putExtra("Destination", destinationText);
+                        intent.putExtra("Departure Time", departure);
+                        intent.putExtra("Bus Number", busNumber);
+
+                        /**TO BE REMOVED*/
+
+                        /**
+                         * Try to pass these variables to database then retrieve in the Ticket class
+                         *
+                         * selectedSeat
+                         * destinationText
+                         * departure
+                         * busNumber
+                         *
+                         * */
+
+
                         startActivity(intent);
                     }
-                }, 2000);
-            }
-        });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+                }, 1500);
             }
         });
     }

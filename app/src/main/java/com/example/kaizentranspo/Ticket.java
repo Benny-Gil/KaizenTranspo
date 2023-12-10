@@ -81,6 +81,6 @@ public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
     }
     @Override
     public void onClick(int position) {
-
+        
     }
 }
