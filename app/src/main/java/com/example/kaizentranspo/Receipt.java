@@ -63,6 +63,7 @@ public class Receipt extends AppCompatActivity {
 
         thanks.setVisibility(View.INVISIBLE);
 
+
         // Retrieve the "Counter" value from Firestore It is like a reference number too keep track of tickets
         DocumentReference ticketReference = fStore.collection("TicketCounter").document("Counter");
         ticketReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -86,6 +87,13 @@ public class Receipt extends AppCompatActivity {
                 }
             }
         });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
+                startActivity(intent);
+                finish();
+
+            }});
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
