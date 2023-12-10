@@ -2,15 +2,12 @@ package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
+
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,7 +51,6 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
     private void setUpBus() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference busesCollection = db.collection("Buses");
-
         busesCollection.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 int startPosition = bus.size();
@@ -69,19 +65,12 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
                     bus.add(new BusList(destination, time, busNumber, price));
                     itemCount++;
                 }
-
-
                 adapter.notifyItemRangeInserted(startPosition, itemCount);
             } else {
                 Exception exception = task.getException();
-                if (exception != null) {
-
-                }
             }
         });
     }
-
-
 
     @Override
     public void onClick(int position) {

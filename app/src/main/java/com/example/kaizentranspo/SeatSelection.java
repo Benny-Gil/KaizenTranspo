@@ -1,14 +1,21 @@
 package com.example.kaizentranspo;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 
 public class SeatSelection extends AppCompatActivity {
 
@@ -17,20 +24,19 @@ public class SeatSelection extends AppCompatActivity {
     private String price;
     private String destinationText;
     private String departure;
-    private String date;
     private String selectedSeat;
     private String busNumber;
 
-    ArrayList<Integer> bookedSeatNumbers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_selection);
 
-        getBookedSeatNumbersFromDatabase();
+        busNumber = getIntent().getStringExtra("Bus Number");
+        //getBookedSeatNumbersFromDatabase(busNumber);
         seats();
-
+        Log.i(TAG,busNumber);
         price = getIntent().getStringExtra("Price");
         TextView priceUI = findViewById(R.id.price);
         priceUI.setText(price);
@@ -41,13 +47,12 @@ public class SeatSelection extends AppCompatActivity {
         destination.setText(destinationText);
 
         departure = getIntent().getStringExtra("Departure Time");
-        TextView time =  findViewById(R.id.departureTime);
-        time.setText("Departure Time: "+departure);
+        TextView time = findViewById(R.id.departureTime);
+        time.setText("Departure Time: " + departure);
 
         busNumber = getIntent().getStringExtra("Bus Number");
         TextView num = findViewById(R.id.bus_num_selection);
         num.setText(busNumber);
-
 
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +60,8 @@ public class SeatSelection extends AppCompatActivity {
             public void onClick(View v) {
                 if (lastClickedButton != null) {
                     selectedSeat = ("Seat #" + lastClickedButton.getText());
-                    Intent intent=new Intent(getApplicationContext(), Receipt.class);
-                    intent.putExtra("selectedSeat",selectedSeat);
+                    Intent intent = new Intent(getApplicationContext(), Receipt.class);
+                    intent.putExtra("selectedSeat", selectedSeat);
                     intent.putExtra("Destination", destinationText);
                     intent.putExtra("Departure Time", departure);
                     intent.putExtra("Price", price);
@@ -85,24 +90,35 @@ public class SeatSelection extends AppCompatActivity {
             }
         });
     }
+
     private void seats() {
         for (int i = 1; i <= 49; i++) {
             int resId = getResources().getIdentifier("seat" + i, "id", getPackageName());
             Button button = findViewById(resId);
             setButtonClickListener(button);
-            if (bookedSeatNumbers.contains(i)) {
-                button.setBackgroundResource(R.drawable.booked_seat);
-                button.setOnClickListener(null);
-            }
-        }
-    }
-    private void getBookedSeatNumbersFromDatabase() {
 
-        /**Just change the data*/
-        int[] booked = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,20,25,30,45};
+            // Check if the document for the seat exists
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference seatCollection = db.collection("Buses").document(busNumber).collection("seats");
+            String seatNumber = "seat" + i;
 
-        for (int seatNumber : booked) {
-            bookedSeatNumbers.add(seatNumber);
+            seatCollection.document(seatNumber).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
+                            // Document exists, proceed with other checks
+                            Boolean isTaken = document.getBoolean("isTaken");
+
+                            if (document.contains("isTaken") && isTaken != null && isTaken) {
+                                button.setBackgroundResource(R.drawable.booked_seat);
+                                button.setOnClickListener(null);
+                            }
+                        }
+                    }
+                }
+            });
         }
     }
 }
