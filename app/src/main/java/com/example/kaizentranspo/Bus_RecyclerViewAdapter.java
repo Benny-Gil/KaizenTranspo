@@ -65,7 +65,7 @@ public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerVi
                         int position = getAdapterPosition();
 
                         if(position != RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onBusClick(position);
+                            recyclerViewInterface.onClick(position);
 
                         }
                     }
