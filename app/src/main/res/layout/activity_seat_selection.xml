@@ -104,19 +104,44 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backButton"
+        android:layout_width="153dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/book_button_gradient"
+        android:text="Back"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.979" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bookButton"
         android:layout_width="153dp"
-        android:layout_height="45dp"
+        android:layout_height="42dp"
         android:background="@drawable/book_button_gradient"
         android:text="Book"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:visibility="invisible"
+        android:visibility="visible"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/textView4"></androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.979">
+
+
+
+    </androidx.appcompat.widget.AppCompatButton>
 
     <ScrollView
         android:layout_width="0dp"
@@ -1036,6 +1061,9 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
