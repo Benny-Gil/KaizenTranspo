@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.CollectionReference;
@@ -34,6 +35,12 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
 
         Button ticketButton = findViewById(R.id.buttonTicket);
 
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
         ticketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

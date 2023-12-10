@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
+/*this is fucking up the login button
         // Goes to Admin Page
         adminLogin.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), AdminPage.class);
@@ -63,6 +63,7 @@ public class Login extends AppCompatActivity {
             finish();
         });
 
+*/
         buttonLogin.setOnClickListener(v -> {
             //deleteeee
             //startActivity(new Intent(getApplicationContext(),BusSelection.class));

@@ -32,7 +32,6 @@ public class MainLog extends AppCompatActivity {
         buttonRegister = findViewById(R.id.buttonRegister);
 
         buttonLogin.setOnClickListener(v -> {
-
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
