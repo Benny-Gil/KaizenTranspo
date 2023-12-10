@@ -264,7 +264,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancelButton"
         android:layout_width="85dp"
-        android:layout_height="34dp"
+        android:layout_height="48dp"
         android:background="@drawable/book_button_gradient"
         android:text="Cancel"
         android:textColor="#FFFFFF"

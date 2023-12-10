@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+/**
+ * This class is for the receipt page
+ */
 public class Receipt extends AppCompatActivity {
 
     @Override
@@ -43,10 +46,16 @@ public class Receipt extends AppCompatActivity {
         TextView busNum = findViewById(R.id.busNumber_receipt);
         busNum.setText(busNumber);
 
-        seat.setText("Seat #" +selectedSeat);
-
-
+        seat.setText(selectedSeat);
         thanks.setVisibility(View.INVISIBLE);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

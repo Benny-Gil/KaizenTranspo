@@ -107,38 +107,34 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/backButton"
         android:layout_width="153dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="29dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/book_button_gradient"
         android:text="Back"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:visibility="visible"
-        android:layout_marginBottom="1dp"
-        android:layout_marginLeft="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.979" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bookButton"
         android:layout_width="153dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/book_button_gradient"
         android:text="Book"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:visibility="visible"
-        android:layout_marginBottom="1dp"
-        android:layout_marginRight="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.979">
-
+        app:layout_constraintStart_toStartOf="parent">
 
 
     </androidx.appcompat.widget.AppCompatButton>
@@ -963,7 +959,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="350dp"
                 android:layout_height="840dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/booking_background"
                 android:elevation="0dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline6"

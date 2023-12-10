@@ -17,10 +17,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
+/**
+ * This class is for the seat selection page.
+ */
 public class SeatSelection extends AppCompatActivity {
 
     private Button lastClickedButton;
     private Button bookButton;
+    private Button backButton;
     private String price;
     private String destinationText;
     private String departure;
@@ -54,6 +58,16 @@ public class SeatSelection extends AppCompatActivity {
         TextView num = findViewById(R.id.bus_num_selection);
         num.setText(busNumber);
 
+        // Back button
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         bookButton = findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,6 +13,9 @@ import com.example.kaizentranspo.classes.TicketList;
 
 import java.util.ArrayList;
 
+/**
+ * This class is for the ticket page
+ */
 public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
     ArrayList<TicketList> ticket = new ArrayList<>();
 
