@@ -73,7 +73,7 @@ public class SeatSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (lastClickedButton != null) {
-                    selectedSeat = ("Seat #" + lastClickedButton.getText());
+                    selectedSeat = ("seat" + lastClickedButton.getText());
                     Intent intent = new Intent(getApplicationContext(), Receipt.class);
                     intent.putExtra("selectedSeat", selectedSeat);
                     intent.putExtra("Destination", destinationText);

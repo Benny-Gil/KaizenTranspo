@@ -49,6 +49,7 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
     }
 
     private void setUpBus() {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference busesCollection = db.collection("Buses");
         busesCollection.get().addOnCompleteListener(task -> {

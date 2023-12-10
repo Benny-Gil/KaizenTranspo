@@ -1,5 +1,6 @@
 package com.example.kaizentranspo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +9,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-/**
- * This class is for the receipt page
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class Receipt extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    int counterValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipt);
+
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         String selectedSeat = intent.getStringExtra("selectedSeat");
@@ -47,13 +60,30 @@ public class Receipt extends AppCompatActivity {
         busNum.setText(busNumber);
 
         seat.setText(selectedSeat);
+
         thanks.setVisibility(View.INVISIBLE);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+        // Retrieve the "Counter" value from Firestore It is like a reference number too keep track of tickets
+        DocumentReference ticketReference = fStore.collection("TicketCounter").document("Counter");
+        ticketReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-                startActivity(intent);
-                finish();
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        counterValue = document.getLong("Counter").intValue();
+                    } else {
+                        // Handle the case where the document does not exist
+                        counterValue = 0; // Set a default value if needed
+                    }
+                } else {
+                    // Handle exceptions during the document retrieval
+                    counterValue = 0; // Set a default value if needed
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    }
+                }
             }
         });
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -67,26 +97,28 @@ public class Receipt extends AppCompatActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(), Ticket.class);
+                        //adding ticket details to database
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        DocumentReference ticketReference = fStore.collection("TicketCounter").document("Counter");
+                        counterValue+=1;
+                        DocumentReference documentReference = fStore.collection("Users").document(user.getUid()).collection("tickets").document(String.valueOf(counterValue));
+                        DocumentReference seatReference = fStore.collection("Buses").document(busNumber).collection("seats").document(selectedSeat);
 
-                        /**TO BE REMOVED*/
+                        Map<String, Integer> counter = new HashMap<>();
+                        counter.put("Counter", counterValue);
+                        ticketReference.set(counter);
+                        Map<String, Object> ticketInfo = new HashMap<>();
+                        ticketInfo.put("Bus Number", busNumber);
+                        ticketInfo.put("Destination", destinationText);
+                        ticketInfo.put("Departure", departure);
+                        ticketInfo.put("Selected Seat", selectedSeat);
 
-                        intent.putExtra("Selected Seat", "Seat #"+selectedSeat);
-                        intent.putExtra("Destination", destinationText);
-                        intent.putExtra("Departure Time", departure);
-                        intent.putExtra("Bus Number", busNumber);
+                        documentReference.set(ticketInfo);
 
-                        /**TO BE REMOVED*/
-
-                        /**
-                         * Try to pass these variables to database then retrieve in the Ticket class
-                         *
-                         * selectedSeat
-                         * destinationText
-                         * departure
-                         * busNumber
-                         *
-                         * */
-
+                        Map<String, Object> seatUpdate = new HashMap<>();
+                        seatUpdate.put("isTaken",true);
+                        seatUpdate.put("reserverName",user.getEmail());
+                        seatReference.set(seatUpdate);
 
                         startActivity(intent);
                     }

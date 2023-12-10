@@ -1,15 +1,23 @@
 package com.example.kaizentranspo;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.kaizentranspo.classes.TicketList;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
@@ -18,16 +26,21 @@ import java.util.ArrayList;
  */
 public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
     ArrayList<TicketList> ticket = new ArrayList<>();
-
+    Ticket_RecyclerViewAdapter adapter;
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_ticket);
+
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
 
         setTicket();
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.ticketrecyclerView);
-        Ticket_RecyclerViewAdapter adapter = new Ticket_RecyclerViewAdapter(this, ticket, this);
+        adapter = new Ticket_RecyclerViewAdapter(this, ticket, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -36,17 +49,6 @@ public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-
-                /**TO BE REMOVED, WAITING FOR DATABASE INTEGRATION*/
-
-                intent.putExtra("Selected Seat", getIntent().getStringExtra("Selected Seat"));
-                intent.putExtra("Destination", getIntent().getStringExtra("Destination"));
-                intent.putExtra("Departure Time",  getIntent().getStringExtra("Departure Time"));
-                intent.putExtra("Bus Number", getIntent().getStringExtra("Bus Number"));
-
-                /**TO BE REMOVED, WAITING FOR DATABASE INTEGRATION*/
-
-
 
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -63,20 +65,28 @@ public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
 
     private void setTicket() {
 
-        /**fetch data from database then store them here-replace data for the arrays*/
+        FirebaseUser user = mAuth.getCurrentUser();
+        CollectionReference collectionReference= fStore.collection("Users").document(user.getUid()).collection("tickets");
+        collectionReference.get().addOnCompleteListener(task -> {
+           if(task.isSuccessful()){
+               int startPosition = ticket.size();
+               int itemCount = 0;
 
-        //example only
-        String[] busDestination = {"HEllo",getIntent().getStringExtra("Destination")};
-        String[] busNumber = {"HEllo",getIntent().getStringExtra("Bus Number")};
-        String[] departureTime = {"HEllo",getIntent().getStringExtra("Departure Time")};
-        String[] seatNumber = {"Test",getIntent().getStringExtra("Selected Seat")};
+               for (QueryDocumentSnapshot document : task.getResult()) {
+                   String busDestination = document.getString("Destination");
+                   String departure = document.getString("Departure");
+                   String busNumber= document.getString("Bus Number");
+                   String selectedSeat = document.getString("Selected Seat");
 
-        for (int i = 0; i < seatNumber.length; i++) {
-            ticket.add(new TicketList(busDestination[i],
-                    departureTime[i],
-                    busNumber[i],
-                    seatNumber[i]));
-        }
+                   ticket.add(new TicketList(busDestination,departure,busNumber,selectedSeat));
+                   itemCount++;
+               }
+               adapter.notifyItemRangeInserted(startPosition, itemCount);
+           }else {
+               Exception exception = task.getException();
+           }
+        });
+
     }
     @Override
     public void onClick(int position) {

@@ -37,4 +37,13 @@ public class TicketList {
         return seatNumber;
     }
 
+    @Override
+    public String toString() {
+        return "TicketList{" +
+                "destination='" + destination + '\'' +
+                ", time='" + time + '\'' +
+                ", busNumber='" + busNumber + '\'' +
+                ", seatNumber='" + seatNumber + '\'' +
+                '}';
+    }
 }
