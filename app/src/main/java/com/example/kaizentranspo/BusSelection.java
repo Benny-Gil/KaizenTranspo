@@ -84,7 +84,7 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
 
 
     @Override
-    public void onBusClick(int position) {
+    public void onClick(int position) {
         Intent intent = new Intent(this, SeatSelection.class);
 
         intent.putExtra("Destination", bus.get(position).getDestination());
@@ -94,5 +94,4 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
 
         startActivity(intent);
     }
-
 }

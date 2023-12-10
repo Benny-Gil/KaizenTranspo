@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,38 +11,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerViewAdapter.MyViewHolder> {
+public class Ticket_RecyclerViewAdapter extends RecyclerView.Adapter<Ticket_RecyclerViewAdapter.MyViewHolder> {
     private final RecyclerViewInterface recyclerViewInterface;
     Context context;
-    ArrayList<BusList> bus = new ArrayList<>();
+    ArrayList<TicketList> ticket = new ArrayList<>();
 
-    public Bus_RecyclerViewAdapter(Context context, ArrayList<BusList> bus, RecyclerViewInterface recyclerViewInterface) {
+    public Ticket_RecyclerViewAdapter(Context context, ArrayList<TicketList> ticket, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
-        this.bus = bus;
+        this.ticket = ticket;
         this.recyclerViewInterface = recyclerViewInterface;
     }
-
     @NonNull
     @Override
-    public Bus_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Ticket_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.bus_recyclerview, parent, false);
-        return new Bus_RecyclerViewAdapter.MyViewHolder(view, recyclerViewInterface);
+        return new Ticket_RecyclerViewAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Bus_RecyclerViewAdapter.MyViewHolder holder,
+    public void onBindViewHolder(@NonNull Ticket_RecyclerViewAdapter.MyViewHolder holder,
                                  int position) {
-        holder.destination.setText(bus.get(position).getDestination());
-        holder.price.setText(bus.get(position).getPrice());
-        holder.busNumber.setText(bus.get(position).getBusNumber());
-        holder.departureTime.setText(bus.get(position).getTime());
+        holder.destination.setText(ticket.get(position).getDestination());
+        holder.price.setText(ticket.get(position).getSeatNumber());
+        holder.busNumber.setText(ticket.get(position).getBusNumber());
+        holder.departureTime.setText(ticket.get(position).getTime());
     }
 
     @Override
     public int getItemCount() {
-        return bus.size();
+        return ticket.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
