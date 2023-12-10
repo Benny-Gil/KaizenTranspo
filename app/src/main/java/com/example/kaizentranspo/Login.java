@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,16 +25,19 @@ public class Login extends AppCompatActivity {
     Button buttonRegister;
     FirebaseAuth mAuth;
     FirebaseFirestore fStore;
+    Button adminLogin;
+
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +55,15 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-        buttonLogin.setOnClickListener(v -> {
 
+        // Goes to Admin Page
+        adminLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+            startActivity(intent);
+            finish();
+        });
+
+        buttonLogin.setOnClickListener(v -> {
             //deleteeee
             //startActivity(new Intent(getApplicationContext(),BusSelection.class));
 
@@ -60,35 +71,34 @@ public class Login extends AppCompatActivity {
             email=String.valueOf(editTextEmail.getText());
             password=String.valueOf(editTextPassword.getText());
 
-            if(TextUtils.isEmpty(email)){
-                Toast.makeText(Login.this,"Enter email",Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(TextUtils.isEmpty(password)){
-                Toast.makeText(Login.this,"Enter Password",Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
 
             }
             mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
             Toast.makeText(Login.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
             checkUserAccessLevel(authResult.getUser().getUid());
             }).addOnFailureListener(e -> Toast.makeText(Login.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show());
-
-                    });
+        });
 
 
     }
 
     private void checkUserAccessLevel(String uid) {
-        DocumentReference documentReference= fStore.collection("Users").document(uid);
+        DocumentReference documentReference = fStore.collection("Users").document(uid);
         documentReference.get().addOnSuccessListener(documentSnapshot -> {
-            Log.d("Tag","onSuccess: " + documentSnapshot.getData());
+            Log.d("Tag", "onSuccess: " + documentSnapshot.getData());
 
-            if(documentSnapshot.getString("isAdmin") != null){
-                startActivity(new Intent(getApplicationContext(),AdminPage.class));
+            if (documentSnapshot.getString("isAdmin") != null) {
+                startActivity(new Intent(getApplicationContext(), AdminPage.class));
                 finish();
             }
-            if(documentSnapshot.getString("isUser")!=null){
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            if (documentSnapshot.getString("isUser") != null) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
         });
