@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kaizentranspo.classes.TicketList;
+
 import java.util.ArrayList;
 
 public class Ticket_RecyclerViewAdapter extends RecyclerView.Adapter<Ticket_RecyclerViewAdapter.MyViewHolder> {

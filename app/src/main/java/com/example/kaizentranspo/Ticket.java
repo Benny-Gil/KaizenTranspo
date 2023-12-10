@@ -3,14 +3,13 @@ package com.example.kaizentranspo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.example.kaizentranspo.classes.TicketList;
 
 import java.util.ArrayList;
 
@@ -34,9 +33,6 @@ public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-
-
 
                 /**TO BE REMOVED, WAITING FOR DATABASE INTEGRATION*/
 

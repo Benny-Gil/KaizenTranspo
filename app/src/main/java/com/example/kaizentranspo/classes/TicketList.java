@@ -1,4 +1,4 @@
-package com.example.kaizentranspo;
+package com.example.kaizentranspo.classes;
 
 public class TicketList {
     private String destination;
