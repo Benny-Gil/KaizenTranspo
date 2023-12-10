@@ -3,6 +3,7 @@ package com.example.kaizentranspo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -10,12 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.util.ArrayList;
 
 public class BusSelection extends AppCompatActivity implements RecyclerViewInterface{
 
     ArrayList<BusList> bus = new ArrayList<>();
-
+    Bus_RecyclerViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +28,9 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
 
         setUpBus();
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
-        Bus_RecyclerViewAdapter adapter = new Bus_RecyclerViewAdapter(this, bus,this);
+        adapter = new Bus_RecyclerViewAdapter(this, bus,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        String destination = getIntent().getStringExtra("Destination");
-        String num = getIntent().getStringExtra("Bus Number");
-        String time = getIntent().getStringExtra("Departure Time");
-        String seatNum= getIntent().getStringExtra("Selected Seat");
 
         Button ticketButton = findViewById(R.id.buttonTicket);
 
@@ -38,33 +38,46 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Ticket.class);
-                intent.putExtra("Selected Seat", seatNum);
-                intent.putExtra("Destination", destination);
-                intent.putExtra("Departure Time", time);
-                intent.putExtra("Bus Number", num);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
+
     private void setUpBus() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference busesCollection = db.collection("Buses");
 
-        /**Extracted data from strings.xml, if possible fetch data from database then store them here*/
+        busesCollection.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                int startPosition = bus.size();
+                int itemCount = 0;
 
-        String[] busDestination = getResources().getStringArray(R.array.bus_destination);
-        String[] busNumber = getResources().getStringArray(R.array.bus_number);
-        String[] departureTime = getResources().getStringArray(R.array.time);
-        String[] price = getResources().getStringArray(R.array.price);
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String busNumber = document.getString("busNumber");
+                    String destination = document.getString("destination");
+                    String price = document.getString("price");
+                    String time = document.getString("time");
 
-        for (int i = 0; i < busDestination.length; i++) {
-            bus.add(new BusList(busDestination[i],
-                    departureTime[i],
-                    busNumber[i],
-                    price[i]));
-        }
+                    bus.add(new BusList(destination, time, busNumber, price));
+                    itemCount++;
+                }
+
+
+                adapter.notifyItemRangeInserted(startPosition, itemCount);
+            } else {
+                Exception exception = task.getException();
+                if (exception != null) {
+
+                }
+            }
+        });
     }
+
+
+
     @Override
-    public void onClick(int position) {
+    public void onBusClick(int position) {
         Intent intent = new Intent(this, SeatSelection.class);
 
         intent.putExtra("Destination", bus.get(position).getDestination());
@@ -74,4 +87,5 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
 
         startActivity(intent);
     }
+
 }

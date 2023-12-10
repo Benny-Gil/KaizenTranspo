@@ -1,0 +1,130 @@
+<!-- Root layout for the entire UI -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Wallpaper image -->
+    <ImageView
+        android:id="@+id/wallpaper_1"
+        android:src="@drawable/wallpaper1"
+        android:contentDescription="wallpaper_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" />
+
+    <!-- Logo layout  at the upper part of the screen -->
+    <RelativeLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="383dp">
+
+        <!-- Logo with name image -->
+        <ImageView
+            android:id="@+id/logowithname_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="19dp"
+            android:contentDescription="logowithname_1"
+            android:src="@drawable/logowithname" />
+
+        <!-- Text: "Seamless Journeys, Effortless Booking" -->
+        <TextView
+            android:id="@+id/seamless_journeys__effortless_booking_"
+            android:layout_width="300.6dp"
+            android:layout_height="30.6dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="-1dp"
+            android:layout_marginTop="226dp"
+            android:shadowColor="#000000"
+            android:shadowDx="0"
+            android:shadowDy="4"
+            android:shadowRadius="4"
+            android:text="@string/companyMoto"
+            android:textAlignment="center"
+            android:textColor="@color/purple"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <!-- Button panel layout at the bottom of the screen -->
+    <RelativeLayout
+        android:id="@+id/buttonPanel"
+        android:layout_marginTop="408dp"
+        android:layout_marginStart="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp">
+
+        <!-- Register button -->
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="262dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="101dp"
+            android:background="@drawable/rectangle1"
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="0"
+            android:shadowDy="4"
+            android:shadowRadius="4"
+            android:text="@string/register_string"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <!-- Login button -->
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="262dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/rectangle2"
+            android:shadowColor="#000000"
+            android:shadowDx="0"
+            android:shadowDy="4"
+            android:shadowRadius="4"
+            android:text="@string/log_in_string"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <!-- "Or" label -->
+        <TextView
+            android:id="@+id/or"
+            android:layout_width="211.4dp"
+            android:layout_height="19.4dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="@string/or_string"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <!-- Divider lines -->
+        <ImageView
+            android:id="@+id/line_3"
+            android:layout_width="142dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="181dp"
+            android:layout_marginTop="78dp"
+            android:contentDescription="line_3"
+            android:src="@drawable/line_3" />
+
+        <ImageView
+            android:id="@+id/line_4"
+            android:layout_width="142dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="-2dp"
+            android:layout_marginTop="78dp"
+            android:contentDescription="line_4"
+            android:src="@drawable/line_4" />
+    </RelativeLayout>
+</RelativeLayout>

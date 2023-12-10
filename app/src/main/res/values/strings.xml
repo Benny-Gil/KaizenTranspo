@@ -12,7 +12,7 @@
     <string name="click_to_register">Click to Register</string>
     <string name="logout">logout</string>
     <string name="ek_img_content">ExportKit Image</string>
-    <string name="seamless_journeys__effortless_booking__string">Seamless Journeys, Effortless Booking.</string>
+    <string name="companyMoto">Seamless Journeys, Effortless Booking</string>
     <string name="log_in_string">Log in</string>
     <string name="register_string">Register</string>
     <string name="welcome_back_string">Welcome Back</string>
@@ -20,6 +20,10 @@
     <string name="username_string">Username</string>
     <string name="password_string">Password</string>
     <string name="or_string">OR</string>
+    <string name="welcomeString">Welcome,</string>
+    <string name="usernameString">User Name</string>
+    <string name="getStartedString">Get started</string>
+    <string name="logOutString">Log out</string>
 
 
     <string-array name="bus_destination">

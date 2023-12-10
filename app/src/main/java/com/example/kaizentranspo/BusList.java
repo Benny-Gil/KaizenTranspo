@@ -12,7 +12,22 @@ public class BusList {
         this.time = time;
         this.busNumber = busNumber;
         this.price = price;
+    }
 
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setBusNumber(String busNumber) {
+        this.busNumber = busNumber;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getDestination() {

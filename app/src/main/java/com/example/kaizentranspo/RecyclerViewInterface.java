@@ -1,5 +1,5 @@
 package com.example.kaizentranspo;
 
 public interface RecyclerViewInterface {
-    void onClick(int position);
+    void onBusClick(int position);
 }

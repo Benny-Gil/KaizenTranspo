@@ -22,6 +22,7 @@ public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerVi
         this.bus = bus;
         this.recyclerViewInterface = recyclerViewInterface;
     }
+
     @NonNull
     @Override
     public Bus_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,7 +65,7 @@ public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerVi
                         int position = getAdapterPosition();
 
                         if(position != RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onClick(position);
+                            recyclerViewInterface.onBusClick(position);
 
                         }
                     }
