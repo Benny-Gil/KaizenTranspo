@@ -26,13 +26,10 @@ public class DatabaseResetter {
 
     public void userTicketsReset() {
         CollectionReference collectionRef = fStore.collection("Users");
-        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        userTicketsDelete(document.getId());
-                    }
+        collectionRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    userTicketsDelete(document.getId());
                 }
             }
         });
@@ -40,13 +37,10 @@ public class DatabaseResetter {
 
     public void busSeatReset() {
         CollectionReference collectionRef = fStore.collection("Buses");
-        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        reset(document.getId());
-                    }
+        collectionRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    reset(document.getId());
                 }
             }
         });
@@ -55,18 +49,15 @@ public class DatabaseResetter {
     private void userTicketsDelete(String uid) {
         CollectionReference collectionRef = fStore.collection("Users").document(uid).collection("tickets");
 
-        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    WriteBatch batch = fStore.batch();
+        collectionRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                WriteBatch batch = fStore.batch();
 
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        batch.delete(document.getReference());
-                    }
-
-                    batch.commit();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    batch.delete(document.getReference());
                 }
+
+                batch.commit();
             }
         });
     }
@@ -74,26 +65,23 @@ public class DatabaseResetter {
 
     private void reset(String busName) {
         CollectionReference seatsCollectionRef = fStore.collection("Buses").document(busName).collection("seats");
-        seatsCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    WriteBatch batch = fStore.batch();
+        seatsCollectionRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                WriteBatch batch = fStore.batch();
 
-                    for (QueryDocumentSnapshot seatDocument : task.getResult()) {
-                        if (seatDocument.contains("isTaken") && seatDocument.contains("reserverName")) {
-                            // Create an update with the new value for isTaken
-                            Map<String, Object> updateData = new HashMap<>();
-                            updateData.put("isTaken", false);
-                            updateData.put("reserverName", null);
+                for (QueryDocumentSnapshot seatDocument : task.getResult()) {
+                    if (seatDocument.contains("isTaken") && seatDocument.contains("reserverName")) {
+                        // Create an update with the new value for isTaken
+                        Map<String, Object> updateData = new HashMap<>();
+                        updateData.put("isTaken", false);
+                        updateData.put("reserverName", null);
 
-                            // Add the update to the batch
-                            batch.update(seatsCollectionRef.document(seatDocument.getId()), updateData);
+                        // Add the update to the batch
+                        batch.update(seatsCollectionRef.document(seatDocument.getId()), updateData);
 
-                        }
                     }
-                    batch.commit();
                 }
+                batch.commit();
             }
         });
     }
@@ -101,15 +89,12 @@ public class DatabaseResetter {
     public void ticketCounterReset() {
         DocumentReference documentReference = fStore.collection("TicketCounter").document("Counter");
 
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    Map<String, Integer> counterInfo = new HashMap<>();
-                    counterInfo.put("Counter", 0);
+        documentReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Map<String, Integer> counterInfo = new HashMap<>();
+                counterInfo.put("Counter", 0);
 
-                    documentReference.set(counterInfo);
-                }
+                documentReference.set(counterInfo);
             }
         });
     }
