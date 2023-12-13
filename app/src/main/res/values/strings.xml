@@ -24,8 +24,8 @@
     <string name="usernameString">User Name</string>
     <string name="getStartedString">Get started</string>
     <string name="logOutString">Log out</string>
-    <string name="ticket">Ticket</string>
-    <string name="book">Book</string>
+    <string name="remove">Remove Bus</string>
+    <string name="bookings">Bookings</string>
     <string name="choose_your_bus">Choose your Bus!</string>
     <string name="reserved_by">Reserved By:</string>
 

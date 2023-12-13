@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper1"
-    tools:context=".admin.AdminPage">
+    tools:context=".admin.AdminBookings">
 
 
 
@@ -56,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/choose_your_bus"
+        android:text="List of Bookings"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +76,8 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/bus_icon_selected"
-        android:text="@string/book"
+        android:drawableTop="@drawable/ticket_icon_selected"
+        android:text="@string/bookings"
         android:textColor="#4F1312"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,8 +90,8 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ticket_icon"
-        android:text="@string/ticket"
+        android:drawableTop="@drawable/bus_icon"
+        android:text="@string/remove"
         android:textColor="#7F7B7A"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,8 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonBook"
-        app:srcCompat="@drawable/home_icon" />
+        app:srcCompat="@drawable/plus" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
