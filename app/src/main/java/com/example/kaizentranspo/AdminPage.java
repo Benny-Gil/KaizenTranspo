@@ -1,46 +1,94 @@
 package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-public class AdminPage extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class AdminPage extends AppCompatActivity implements RecyclerViewInterface{
     FirebaseAuth auth;
-    Button button;
-    TextView textView;
     FirebaseUser user;
-
+    Bus_RecyclerViewAdapter adapter;
+    ArrayList<BusList> bus = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
 
         auth=FirebaseAuth.getInstance();
-        button=findViewById(R.id.logout);
-        textView=findViewById(R.id.userDetails);
         user = auth.getCurrentUser();
-//        if(user==null){
-//            Intent intent = new Intent(getApplicationContext(), Login.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//        else {
-//            textView.setText(user.getEmail());
-//        }
-        button.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(getApplicationContext(), Login.class);
+        setUpBus();
+        androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
+        adapter = new Bus_RecyclerViewAdapter(this, bus,this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Button ticketButton = findViewById(R.id.buttonTicket);
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         });
+        ticketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Ticket.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+    }
+    private void setUpBus() {
 
-        // Dito ilalagay anh activity ng admin once nag login sya
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference busesCollection = db.collection("Buses");
+        busesCollection.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                int startPosition = bus.size();
+                int itemCount = 0;
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String busNumber = document.getString("busNumber");
+                    String destination = document.getString("destination");
+                    String price = document.getString("price");
+                    String time = document.getString("time");
+
+                    bus.add(new BusList(destination, time, busNumber, price));
+                    itemCount++;
+                }
+                adapter.notifyItemRangeInserted(startPosition, itemCount);
+            } else {
+                Exception exception = task.getException();
+            }
+        });
+    }
+
+
+
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(this, SeatAdminView.class);
+
+        intent.putExtra("Bus Number", bus.get(position).getBusNumber());
+
+
+        startActivity(intent);
     }
 }
