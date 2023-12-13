@@ -56,13 +56,12 @@
         <!-- Layout for the user credentials -->
         <RelativeLayout
             android:id="@+id/userCredentials"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="362dp"
+            android:layout_height="226dp"
             android:layout_above="@+id/group_3"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="46dp"
-            android:layout_marginTop="284dp"
-            android:layout_marginBottom="-348dp">
+            android:layout_marginBottom="-378dp">
 
             <!-- Username icon -->
             <ImageView
@@ -83,8 +82,8 @@
                 android:gravity="center"
                 android:hint="Enter email"
                 android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                app:autoSizeTextType="uniform" />
 
             <!-- Password icon -->
             <ImageView
@@ -108,21 +107,67 @@
                 android:hint="@string/password_string"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                app:autoSizeTextType="uniform" />
+
+            <!-- Admin Register -->
+            <CheckBox
+                android:id="@+id/adminCheckbox"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="120dp"
+                />
+
+            <!-- Admin icon -->
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="130dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="Register as admin"/>
+
+            <ImageView
+                android:id="@+id/adminIcon"
+                android:layout_width="33dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="175dp"
+                android:contentDescription="login_page_password_1"
+                android:src="@drawable/passwordicon"
+                android:visibility="invisible" />
+
+            <!-- admin input field -->
+            <EditText
+                android:id="@+id/adminCode"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="175dp"
+                android:gravity="center"
+                android:hint="@string/adminCode"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:visibility="invisible"
+                app:autoSizeTextType="uniform" />
 
         </RelativeLayout>
 
         <!-- Button group at the bottom of the screen -->
         <RelativeLayout
             android:id="@+id/group_3"
-            android:layout_marginTop="408dp"
-            android:layout_marginStart="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="100dp">
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="408dp"
+            android:layout_marginBottom="42dp">
 
             <!-- Register button -->
 
@@ -175,21 +220,21 @@
             <!-- Divider lines -->
             <ImageView
                 android:id="@+id/line_3"
-                android:src="@drawable/line_3"
-                android:contentDescription="line_3"
+                android:layout_width="142dp"
+                android:layout_height="2dp"
                 android:layout_marginStart="181dp"
                 android:layout_marginTop="78dp"
-                android:layout_width="142dp"
-                android:layout_height="2dp" />
+                android:contentDescription="line_3"
+                android:src="@drawable/line_3" />
 
             <ImageView
                 android:id="@+id/line_4"
-                android:src="@drawable/line_4"
-                android:contentDescription="line_4"
+                android:layout_width="142dp"
+                android:layout_height="2dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginTop="78dp"
-                android:layout_width="142dp"
-                android:layout_height="2dp" />
+                android:contentDescription="line_4"
+                android:src="@drawable/line_4" />
 
         </RelativeLayout>
 
