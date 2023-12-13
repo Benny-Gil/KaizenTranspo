@@ -1,4 +1,4 @@
-package com.example.kaizentranspo;
+package com.example.kaizentranspo.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 
+import com.example.kaizentranspo.BusList;
+import com.example.kaizentranspo.Bus_RecyclerViewAdapter;
+import com.example.kaizentranspo.MainActivity;
+import com.example.kaizentranspo.R;
+import com.example.kaizentranspo.RecyclerViewInterface;
+import com.example.kaizentranspo.SeatAdminView;
+import com.example.kaizentranspo.Ticket;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -19,7 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class AdminPage extends AppCompatActivity implements RecyclerViewInterface{
+public class AdminPage extends AppCompatActivity implements RecyclerViewInterface {
     FirebaseAuth auth;
     FirebaseUser user;
     Bus_RecyclerViewAdapter adapter;
