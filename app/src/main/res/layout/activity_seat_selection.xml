@@ -751,7 +751,7 @@
                 android:id="@+id/seat47"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="768dp"
+                android:layout_marginTop="757dp"
                 android:background="@drawable/available_seat"
                 android:text="47"
                 android:textColor="#FFFFFF"
@@ -958,7 +958,7 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="350dp"
-                android:layout_height="840dp"
+                android:layout_height="860dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/booking_background"
                 android:elevation="0dp"

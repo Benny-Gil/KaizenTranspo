@@ -9,7 +9,6 @@
     tools:context=".AdminPage">
 
 
-
     <TextView
         android:id="@+id/textView19"
         android:layout_width="348dp"
@@ -56,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/choose_your_bus"
+        android:text="@string/See_Bus_Bookings"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +76,8 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/bus_icon_selected"
-        android:text="@string/book"
+        android:drawableTop="@drawable/ticket_icon_selected"
+        android:text="@string/Bookings"
         android:textColor="#4F1312"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,8 +90,8 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ticket_icon"
-        android:text="@string/ticket"
+        android:drawableTop="@drawable/bus_icon"
+        android:text="@string/removeBus"
         android:textColor="#7F7B7A"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,14 +99,6 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/textView16" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 
     <ImageButton
         android:id="@+id/homeButton"
@@ -117,10 +108,18 @@
 
         app:layout_constraintBottom_toBottomOf="@+id/buttonBook"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonBook"
+        app:layout_constraintVertical_bias="0.318"
         app:srcCompat="@drawable/home_icon" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

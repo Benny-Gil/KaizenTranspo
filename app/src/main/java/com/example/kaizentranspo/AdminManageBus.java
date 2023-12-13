@@ -1,43 +1,42 @@
 package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class AdminPage extends AppCompatActivity implements RecyclerViewInterface{
-    FirebaseAuth auth;
-    FirebaseUser user;
-    Bus_RecyclerViewAdapter adapter;
+public class AdminManageBus extends AppCompatActivity implements RecyclerViewInterface{
     ArrayList<BusList> bus = new ArrayList<>();
+    Bus_RecyclerViewAdapter adapter;
+    Button remove;
+    ImageButton add;
+    private ConstraintLayout busDetailsHolder;
+    ImageButton close;
+    TextView destination, price, busNumber, departureTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_page);
+        setContentView(R.layout.activity_admin_manage_bus);
 
-        auth=FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
         setUpBus();
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
-        adapter = new Bus_RecyclerViewAdapter(this, bus,this);
+        adapter = new Bus_RecyclerViewAdapter(this, bus, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Button ticketButton = findViewById(R.id.buttonTicket);
 
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
@@ -45,16 +44,36 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
             startActivity(intent);
             finish();
         });
-        //did not renamed
-        ticketButton.setOnClickListener(new View.OnClickListener() {
+        /**
+         *
+         * Did not try to run it maybe the overlay will F_UP
+         *
+         * */
+        busDetailsHolder = findViewById(R.id.busDetailsHolder);
+        busDetailsHolder.setVisibility(View.INVISIBLE);
+
+        close = findViewById(R.id.closeButton);
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminManageBus.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                busDetailsHolder.setVisibility(View.INVISIBLE);
             }
         });
+        add = findViewById(R.id.addBusButton);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdminCreateBus.class);
+                startActivity(intent);
+            }
+        });
+
     }
+/**
+ *
+ * Copied from the busSelection
+ *
+ * */
     private void setUpBus() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -80,18 +99,34 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
         });
     }
 
-
     @Override
     public void onClick(int position) {
-        Intent intent = new Intent(this, SeatAdminView.class);
+        String busNum;
+        busNum = bus.get(position).getBusNumber();
+        busNumber = findViewById(R.id.busNumber_admin);
+        busNumber.setText(busNum);
 
-        intent.putExtra("Bus Number", bus.get(position).getBusNumber());
+        busDetailsHolder.setVisibility(View.VISIBLE);
 
-        //just added
-        intent.putExtra("Price", bus.get(position).getPrice());
-        intent.putExtra("Bus Number", bus.get(position).getBusNumber());
-        intent.putExtra("Departure Time", bus.get(position).getTime());
+        destination = findViewById(R.id.destination_admin);
+        price = findViewById(R.id.price_admin);
+        departureTime = findViewById(R.id.departureTime_admin);
 
-        startActivity(intent);
+        destination.setText(bus.get(position).getDestination());
+        price.setText(bus.get(position).getPrice());
+        departureTime.setText(bus.get(position).getTime());
+
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /**
+                *
+                * MODIFYYY
+                *
+                * */
+                //busListManager.removeBus(busNum);
+            }
+        });
     }
 }
+
