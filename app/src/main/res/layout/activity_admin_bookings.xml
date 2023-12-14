@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="List of Bookings"
+        android:text="@string/list_of_bookings"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"

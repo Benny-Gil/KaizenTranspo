@@ -28,18 +28,19 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
     private static final String ADMIN_CODE = "admin123";
-    EditText editTextEmail,editTextPassword,adminEditText;
+    EditText editTextEmail, editTextPassword, adminEditText;
     ImageView adminIcon;
     Button buttonReg;
     Button buttonLogin;
     CheckBox checkBox;
     FirebaseAuth mAuth;
     FirebaseFirestore fStore;
+
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -50,15 +51,15 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mAuth=FirebaseAuth.getInstance();
-        fStore=FirebaseFirestore.getInstance();
-        editTextEmail=findViewById(R.id.registerUsername);
-        editTextPassword=findViewById(R.id.registerPassword);
-        buttonReg=findViewById(R.id.buttonRegister);
-        buttonLogin=findViewById(R.id.buttonLogin);
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        editTextEmail = findViewById(R.id.registerUsername);
+        editTextPassword = findViewById(R.id.registerPassword);
+        buttonReg = findViewById(R.id.buttonRegister);
+        buttonLogin = findViewById(R.id.buttonLogin);
         checkBox = findViewById(R.id.adminCheckbox);
-        adminEditText=findViewById(R.id.adminCode);
-        adminIcon=findViewById(R.id.adminIcon);
+        adminEditText = findViewById(R.id.adminCode);
+        adminIcon = findViewById(R.id.adminIcon);
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // If the checkbox is checked, make the adminIcon and adminEditText visible
@@ -93,60 +94,68 @@ public class Register extends AppCompatActivity {
                 return;
             }
 
+            String enteredAdminCode = adminEditText.getText().toString();
+            if (checkBox.isChecked() && enteredAdminCode.equals(ADMIN_CODE)) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(Register.this, "Account Created.", Toast.LENGTH_SHORT).show();
+                                DocumentReference documentReference = fStore.collection("Users").document(user.getUid());
 
+                                Map<String, Object> userInfo = new HashMap<>();
+                                userInfo.put("email", email);
+                                userInfo.put("isAdmin", "1");
 
+                                documentReference.set(userInfo);
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-
-                        if (task.isSuccessful()) {
-                            // User creation successful
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(Register.this, "Account Created.", Toast.LENGTH_SHORT).show();
-                            DocumentReference documentReference=fStore.collection("Users").document(user.getUid());
-                            Map<String,Object> userInfo = new HashMap<>();
-                            userInfo.put("Email",email);
-
-                            userInfo.put("isUser","1");
-
-                            documentReference.set(userInfo);
-
-                            Intent intent = new Intent(getApplicationContext(), Login.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // Check if the exception is a FirebaseAuthWeakPasswordException
-                            if (task.getException() instanceof FirebaseAuthWeakPasswordException) {
-                                Toast.makeText(Register.this, "Weak password. Please choose a stronger password. (Atleast 6 Characters)", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), AdminBookingView.class);
+                                startActivity(intent);
+                                finish();
                             } else {
-                                // Handle other authentication failures
-                                Toast.makeText(Register.this, "Authentication failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                {
+                                    // Check if the exception is a FirebaseAuthWeakPasswordException
+                                    if (task.getException() instanceof FirebaseAuthWeakPasswordException) {
+                                        Toast.makeText(Register.this, "Weak password. Please choose a stronger password. (Atleast 6 Characters)", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Handle other authentication failures
+                                        Toast.makeText(Register.this, "Authentication failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
-                        }
-                    });
+                        });
+            } else if (!checkBox.isChecked()) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        String enteredAdminCode = adminEditText.getText().toString();
+                            if (task.isSuccessful()) {
+                                // User creation successful
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(Register.this, "Account Created.", Toast.LENGTH_SHORT).show();
+                                DocumentReference documentReference = fStore.collection("Users").document(user.getUid());
+                                Map<String, Object> userInfo = new HashMap<>();
+                                userInfo.put("Email", email);
 
-                        if (enteredAdminCode.equals(ADMIN_CODE)) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(Register.this, "Account Created.", Toast.LENGTH_SHORT).show();
-                            DocumentReference documentReference=fStore.collection("Users").document(user.getUid());
+                                userInfo.put("isUser", "1");
 
-                            Map<String, Object> userInfo = new HashMap<>();
-                            userInfo.put("email", email);
-                            userInfo.put("isAdmin","1");
+                                documentReference.set(userInfo);
 
-                            documentReference.set(userInfo);
-
-                            Intent intent = new Intent(getApplicationContext(), MainLog.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(this, "Incorrect admin code", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Check if the exception is a FirebaseAuthWeakPasswordException
+                                if (task.getException() instanceof FirebaseAuthWeakPasswordException) {
+                                    Toast.makeText(Register.this, "Weak password. Please choose a stronger password. (Atleast 6 Characters)", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // Handle other authentication failures
+                                    Toast.makeText(Register.this, "Authentication failed: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }else{
+                Toast.makeText(Register.this, "Incorrect admin code", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

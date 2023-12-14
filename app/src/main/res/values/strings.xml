@@ -28,6 +28,20 @@
     <string name="book">Book</string>
     <string name="choose_your_bus">Choose your Bus!</string>
     <string name="reserved_by">Reserved By:</string>
+    <string name="list_of_bookings">List of Bookings</string>
+    <string name="bookings">bookings</string>
+    <string name="remove">remove</string>
+    <string name="create_bus">Create Bus</string>
+    <string name="Bookings">Bookings</string>
+    <string name="removeBus">removeBus</string>
+    <string name="bus_details">Bus Details</string>
+    <string name="origin">Origin:</string>
+    <string name="destination">Destination:</string>
+    <string name="time_of_departure">Time of Departure:</string>
+    <string name="bus_number">Bus Number:</string>
+    <string name="Select_Bus">Select_Bus</string>
+    <string name="See_Bus_Bookings">See_Bus_Bookings</string>
+    <string name="adminCode">adminCode</string>
 
 
     <string-array name="bus_destination">
