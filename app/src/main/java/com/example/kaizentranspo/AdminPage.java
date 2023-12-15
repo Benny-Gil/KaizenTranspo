@@ -94,10 +94,7 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
     @Override
     public void onClick(int position) {
         Intent intent = new Intent(this, SeatAdminView.class);
-
-        intent.putExtra("Bus Number", bus.get(position).getBusNumber());
-
-        //just added
+        intent.putExtra("Destination",bus.get(position).getDestination());
         intent.putExtra("Price", bus.get(position).getPrice());
         intent.putExtra("Bus Number", bus.get(position).getBusNumber());
         intent.putExtra("Departure Time", bus.get(position).getTime());

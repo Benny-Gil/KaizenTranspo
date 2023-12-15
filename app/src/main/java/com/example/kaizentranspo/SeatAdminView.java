@@ -19,6 +19,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SeatAdminView extends AppCompatActivity {
     private Button lastClickedButton;
     private Button backButton;
@@ -29,13 +32,14 @@ public class SeatAdminView extends AppCompatActivity {
     private String selectedSeat;
     private String busNumber;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_selection);
 
+
         busNumber = getIntent().getStringExtra("Bus Number");
-        //getBookedSeatNumbersFromDatabase(busNumber);
         seats();
         Log.i(TAG,busNumber);
         price = getIntent().getStringExtra("Price");
@@ -54,6 +58,7 @@ public class SeatAdminView extends AppCompatActivity {
         busNumber = getIntent().getStringExtra("Bus Number");
         TextView num = findViewById(R.id.bus_num_selection);
         num.setText(busNumber);
+
 
         // Back button
         backButton = findViewById(R.id.backButton);
@@ -134,7 +139,6 @@ public class SeatAdminView extends AppCompatActivity {
             });
         }
     }
+
+
 }
-/**
- * ETO UNG SECOND PIC
- */

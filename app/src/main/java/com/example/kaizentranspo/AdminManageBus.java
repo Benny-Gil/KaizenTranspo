@@ -1,5 +1,6 @@
 package com.example.kaizentranspo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -25,6 +29,7 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
     private ConstraintLayout busDetailsHolder;
     ImageButton close;
     TextView destination, price, busNumber, departureTime;
+    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
         setContentView(R.layout.activity_admin_manage_bus);
 
         setUpBus();
+        fStore=FirebaseFirestore.getInstance();
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
         adapter = new Bus_RecyclerViewAdapter(this, bus, this);
         recyclerView.setAdapter(adapter);
@@ -102,6 +108,7 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
 
     @Override
     public void onClick(int position) {
+        remove = findViewById(R.id.removeButton);
         String busNum;
         busNum = bus.get(position).getBusNumber();
         busNumber = findViewById(R.id.busNumber_admin);
@@ -120,14 +127,30 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /**
-                *
-                * MODIFYYY
-                *
-                * */
-                //busListManager.removeBus(busNum);
+                CollectionReference cf =fStore.collection("Buses");
+                String busNumberToDelete = bus.get(position).getBusNumber();
+
+                // Delete the document with the specified busNumber
+                cf.document(busNumberToDelete)
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Document successfully deleted
+                                Toast.makeText(AdminManageBus.this, "Bus deleted successfully", Toast.LENGTH_SHORT).show();
+                                busDetailsHolder.setVisibility(View.INVISIBLE);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Handle any errors that occurred during the deletion
+                                Toast.makeText(AdminManageBus.this, "Error deleting bus: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
+
     }
 }
 
