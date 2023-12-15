@@ -1,4 +1,4 @@
-package com.example.kaizentranspo.admin;
+package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
 

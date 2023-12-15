@@ -1,4 +1,4 @@
-package com.example.kaizentranspo.admin;
+package com.example.kaizentranspo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.kaizentranspo.R;
 
-public class RemoveBus extends AppCompatActivity {
+public class BusAdd extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_remove_bus);
+        setContentView(R.layout.activity_bus_add);
     }
 }

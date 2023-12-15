@@ -1,6 +1,7 @@
 package com.example.kaizentranspo;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,12 +22,14 @@ public class MainActivity extends AppCompatActivity {
     Button logoutButton;
     TextView textView;
     FirebaseUser user;
+    FirebaseFirestore fStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         auth=FirebaseAuth.getInstance();
+        fStore= FirebaseFirestore.getInstance();
         startButton = findViewById(R.id.getStartedButton);
         logoutButton=findViewById(R.id.logoutButton);
         textView=findViewById(R.id.userName);
@@ -38,11 +43,8 @@ public class MainActivity extends AppCompatActivity {
         else {
             textView.setText(user.getEmail());
         }
-
         startButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-            startActivity(intent);
-            finish();
+            checkUserAccessLevel(user.getUid());
 
         });
 
@@ -53,8 +55,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+    public void checkUserAccessLevel(String uid) {
+        DocumentReference documentReference = fStore.collection("Users").document(uid);
+        documentReference.get().addOnSuccessListener(documentSnapshot -> {
+            Log.d("Tag", "onSuccess: " + documentSnapshot.getData());
 
-
-
+            if (documentSnapshot.getString("isAdmin") != null) {
+                startActivity(new Intent(getApplicationContext(), AdminPage.class));
+                finish();
+            }
+            if (documentSnapshot.getString("isUser") != null) {
+                startActivity(new Intent(getApplicationContext(), BusSelection.class));
+                finish();
+            }
+        });
     }
 }
