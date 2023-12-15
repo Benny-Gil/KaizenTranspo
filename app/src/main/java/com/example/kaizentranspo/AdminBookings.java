@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import com.example.kaizentranspo.R;
 
+/**
+ * This class is used to display the bookings made by the user
+ */
 public class AdminBookings extends AppCompatActivity {
 
     @Override
