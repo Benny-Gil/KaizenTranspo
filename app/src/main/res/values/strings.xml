@@ -39,16 +39,15 @@
     <string name="destination">Destination:</string>
     <string name="time_of_departure">Time of Departure:</string>
     <string name="bus_number">Bus Number:</string>
-    <string name="Select_Bus">Select_Bus</string>
-    <string name="See_Bus_Bookings">See_Bus_Bookings</string>
+    <string name="Select_Bus">Select Bus</string>
+    <string name="See_Bus_Bookings">See Bus Bookings</string>
     <string name="adminCode">adminCode</string>
     <string name="Add_bus">Add Bus</string>
-    <string name="Reset" />
     <string name="reset">Reset</string>
     <string name="reset_seats">Reset seats</string>
     <string name="remove_bus">remove bus</string>
-    <string name="mangage_bus">Mangage Bus</string>
     <string name="manage_bus">manage bus</string>
+    <string name="see_details">Details</string>
 
 
     <string-array name="bus_destination">

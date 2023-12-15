@@ -87,7 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/bus_icon_selected"
-        android:text="@string/removeBus"
+        android:text="@string/manage_bus"
         android:textColor="#4F1312"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,8 +126,10 @@
             android:background="@drawable/booking_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView5"
