@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.kaizentranspo.SectionsPagerAdapter;
+import com.example.kaizentranspo.ui.main.SectionsPagerAdapter;
 import com.example.kaizentranspo.databinding.ActivityBookBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
