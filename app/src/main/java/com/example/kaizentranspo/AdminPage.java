@@ -45,23 +45,25 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Button ticketButton = findViewById(R.id.buttonTicket);
-
+        Button manageBus = findViewById(R.id.manageBus);
         ImageButton homeButton = findViewById(R.id.homeButton);
+
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         });
-        //did not renamed
-        ticketButton.setOnClickListener(new View.OnClickListener() {
+
+
+        manageBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AdminManageBus.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
             }
         });
+
     }
     private void setUpBus() {
 

@@ -41,6 +41,10 @@
         <activity
             android:name=".AdminPage"
             android:exported="false" />
+        <activity android:name=".AdminCreateBus"
+            android:exported="false"/>
+        <activity android:name=".AdminManageBus"
+            android:exported="false"/>
         <activity
             android:name=".Register"
             android:exported="false"

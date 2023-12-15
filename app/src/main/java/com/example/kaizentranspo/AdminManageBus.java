@@ -36,7 +36,7 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
         adapter = new Bus_RecyclerViewAdapter(this, bus, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        Button buttonBook = findViewById(R.id.buttonBook);
 
         ImageButton homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
@@ -44,11 +44,12 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
             startActivity(intent);
             finish();
         });
-        /**
-         *
-         * Did not try to run it maybe the overlay will F_UP
-         *
-         * */
+        buttonBook.setOnClickListener(v ->{
+            Intent intent = new Intent(getApplicationContext(), AdminPage.class);
+            startActivity(intent);
+            finish();
+        });
+
         busDetailsHolder = findViewById(R.id.busDetailsHolder);
         busDetailsHolder.setVisibility(View.INVISIBLE);
 

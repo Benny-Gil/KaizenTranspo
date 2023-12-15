@@ -8,13 +8,14 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.FirebaseApp;
 public class MainLog extends AppCompatActivity {
     Button buttonLogin;
     Button buttonRegister;
     FirebaseAuth mAuth;
     public void onStart() {
         super.onStart();
+        FirebaseApp.initializeApp(this);
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -57,33 +57,52 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonBook_add"
+        android:id="@+id/buttonBook"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ticket_icon"
+        android:drawableTop="@drawable/ticket_icon_selected"
         android:text="@string/Bookings"
-        android:textColor="#6D6C6C"
+        android:textColor="#4F1312"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        app:layout_constraintTop_toTopOf="@+id/textView16"
+        tools:ignore="SmallSp" />
+
 
     <Button
-        android:id="@+id/buttonTicket"
+        android:id="@+id/removeBus"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/bus_icon_selected"
-        android:text="@string/removeBus"
+        android:drawableTop="@drawable/bus_icon"
+        android:text="@string/remove_bus"
         android:textColor="#4F1312"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/book_button_gradient"
+
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonBook"
+        app:layout_constraintVertical_bias="0.318"
+        app:srcCompat="@drawable/home_icon" />
+
 
     <TextView
         android:id="@+id/textView19_add"
@@ -309,19 +328,6 @@
         app:layout_constraintTop_toTopOf="@+id/textView19_add"
         app:srcCompat="@android:drawable/ic_delete" />
 
-
-    <ImageButton
-        android:id="@+id/homeButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/book_button_gradient"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonBook_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/buttonBook_add"
-        app:layout_constraintVertical_bias="0.318"
-        app:srcCompat="@drawable/home_icon" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

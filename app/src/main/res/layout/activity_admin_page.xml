@@ -85,14 +85,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView16" />
 
+
     <Button
-        android:id="@+id/buttonTicket"
+        android:id="@+id/manageBus"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/bus_icon"
-        android:text="@string/removeBus"
-        android:textColor="#7F7B7A"
+        android:text="@string/manage_bus"
+        android:textColor="#4F1312"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,6 +121,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
