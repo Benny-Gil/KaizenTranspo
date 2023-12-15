@@ -19,6 +19,7 @@ import com.example.kaizentranspo.R;
 import com.example.kaizentranspo.RecyclerViewInterface;
 import com.example.kaizentranspo.SeatAdminView;
 import com.example.kaizentranspo.Ticket;
+import com.example.kaizentranspo.classes.DatabaseResetter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -31,6 +32,7 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
     FirebaseAuth auth;
     FirebaseUser user;
     Bus_RecyclerViewAdapter adapter;
+    Button resetButton;
     ArrayList<BusList> bus = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,14 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
+        });
+
+        resetButton = findViewById(R.id.resetAllButton);
+        resetButton.setOnClickListener(v -> {
+            DatabaseResetter dr = new DatabaseResetter();
+            dr.userTicketsReset();
+            dr.busSeatReset();
+            dr.ticketCounterReset();
         });
 
 
