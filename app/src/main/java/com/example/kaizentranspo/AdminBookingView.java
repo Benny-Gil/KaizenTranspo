@@ -20,8 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AdminBookingView extends AppCompatActivity {
 
-    FirebaseFirestore fStore;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +31,7 @@ public class AdminBookingView extends AppCompatActivity {
 
         Button confirmButton = findViewById(R.id.confirmButton);
 
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        confirmButton.setOnClickListener(v -> finish());
 
         TextView seat = findViewById(R.id.seatNumber_receipt);
 
@@ -63,18 +56,15 @@ public class AdminBookingView extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference seatCollection = db.collection("Buses").document(busNumber).collection("seats");
-        seatCollection.document(selectedSeat).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null && document.exists()) {
-                        String reserverEmail = document.getString("reserverName");
-                        TextView userName = findViewById(R.id.userName);
-                        userName.setText(reserverEmail);
-                    } else {
-                        Log.i(TAG, "Null");
-                    }
+        seatCollection.document(selectedSeat).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document != null && document.exists()) {
+                    String reserverEmail = document.getString("reserverName");
+                    TextView userName = findViewById(R.id.userName);
+                    userName.setText(reserverEmail);
+                } else {
+                    Log.i(TAG, "Null");
                 }
             }
         });

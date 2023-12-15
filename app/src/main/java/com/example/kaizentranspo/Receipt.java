@@ -66,72 +66,65 @@ public class Receipt extends AppCompatActivity {
 
         // Retrieve the "Counter" value from Firestore It is like a reference number too keep track of tickets
         DocumentReference ticketReference = fStore.collection("TicketCounter").document("Counter");
-        ticketReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        counterValue = document.getLong("Counter").intValue();
-                    } else {
-                        // Handle the case where the document does not exist
-                        counterValue = 0; // Set a default value if needed
-                    }
+        ticketReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    counterValue = document.getLong("Counter").intValue();
                 } else {
-                    // Handle exceptions during the document retrieval
+                    // Handle the case where the document does not exist
                     counterValue = 0; // Set a default value if needed
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        exception.printStackTrace();
-                    }
+                }
+            } else {
+                // Handle exceptions during the document retrieval
+                counterValue = 0; // Set a default value if needed
+                Exception exception = task.getException();
+                if (exception != null) {
+                    exception.printStackTrace();
                 }
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-                startActivity(intent);
-                finish();
+        cancelButton.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getApplicationContext(), BusSelection.class);
+            startActivity(intent1);
+            finish();
 
-            }});
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelButton.setVisibility(View.INVISIBLE);
-                confirmButton.setVisibility(View.INVISIBLE);
-                thanks.setVisibility(View.VISIBLE);
+        });
+        confirmButton.setOnClickListener(v -> {
+            cancelButton.setVisibility(View.INVISIBLE);
+            confirmButton.setVisibility(View.INVISIBLE);
+            thanks.setVisibility(View.VISIBLE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(getApplicationContext(), Ticket.class);
-                        //adding ticket details to database
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        DocumentReference ticketReference = fStore.collection("TicketCounter").document("Counter");
-                        counterValue+=1;
-                        DocumentReference documentReference = fStore.collection("Users").document(user.getUid()).collection("tickets").document(String.valueOf(counterValue));
-                        DocumentReference seatReference = fStore.collection("Buses").document(busNumber).collection("seats").document(selectedSeat);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent12 = new Intent(getApplicationContext(), Ticket.class);
+                    //adding ticket details to database
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    DocumentReference ticketReference1 = fStore.collection("TicketCounter").document("Counter");
+                    counterValue+=1;
+                    DocumentReference documentReference = fStore.collection("Users").document(user.getUid()).collection("tickets").document(String.valueOf(counterValue));
+                    DocumentReference seatReference = fStore.collection("Buses").document(busNumber).collection("seats").document(selectedSeat);
 
-                        Map<String, Integer> counter = new HashMap<>();
-                        counter.put("Counter", counterValue);
-                        ticketReference.set(counter);
-                        Map<String, Object> ticketInfo = new HashMap<>();
-                        ticketInfo.put("Bus Number", busNumber);
-                        ticketInfo.put("Destination", destinationText);
-                        ticketInfo.put("Departure", departure);
-                        ticketInfo.put("Selected Seat", selectedSeat);
+                    Map<String, Integer> counter = new HashMap<>();
+                    counter.put("Counter", counterValue);
+                    ticketReference1.set(counter);
+                    Map<String, Object> ticketInfo = new HashMap<>();
+                    ticketInfo.put("Bus Number", busNumber);
+                    ticketInfo.put("Destination", destinationText);
+                    ticketInfo.put("Departure", departure);
+                    ticketInfo.put("Selected Seat", selectedSeat);
 
-                        documentReference.set(ticketInfo);
+                    documentReference.set(ticketInfo);
 
-                        Map<String, Object> seatUpdate = new HashMap<>();
-                        seatUpdate.put("isTaken",true);
-                        seatUpdate.put("reserverName",user.getEmail());
-                        seatReference.set(seatUpdate);
+                    Map<String, Object> seatUpdate = new HashMap<>();
+                    seatUpdate.put("isTaken",true);
+                    seatUpdate.put("reserverName",user.getEmail());
+                    seatReference.set(seatUpdate);
 
-                        startActivity(intent);
-                    }
-                }, 1500);
-            }
+                    startActivity(intent12);
+                }
+            }, 1500);
         });
     }
 }

@@ -28,7 +28,6 @@ public class Login extends AppCompatActivity {
     Button buttonRegister;
     FirebaseAuth mAuth;
     FirebaseFirestore fStore;
-    Button adminLogin;
 
     @Override
     public void onStart() {

@@ -58,16 +58,13 @@ public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerVi
             busNumber = itemView.findViewById(R.id.busNumber_recycleView);
             departureTime = itemView.findViewById(R.id.departureTime_recycleView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(recyclerViewInterface != null){
-                        int position = getAdapterPosition();
+            itemView.setOnClickListener(v -> {
+                if(recyclerViewInterface != null){
+                    int position = getAdapterPosition();
 
-                        if(position != RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onClick(position);
+                    if(position != RecyclerView.NO_POSITION){
+                        recyclerViewInterface.onClick(position);
 
-                        }
                     }
                 }
             });

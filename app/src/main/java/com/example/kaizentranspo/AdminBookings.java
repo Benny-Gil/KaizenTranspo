@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.example.kaizentranspo.R;
 
 /**
- * This class is used to display the bookings made by the user
+ * TO BE REMOVED
  */
 public class AdminBookings extends AppCompatActivity {
 

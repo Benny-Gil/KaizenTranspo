@@ -38,13 +38,10 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
             startActivity(intent);
             finish();
         });
-        ticketButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Ticket.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
+        ticketButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), Ticket.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
     }
 

@@ -38,7 +38,7 @@ public class SeatSelection extends AppCompatActivity {
         setContentView(R.layout.activity_seat_selection);
 
         busNumber = getIntent().getStringExtra("Bus Number");
-        //getBookedSeatNumbersFromDatabase(busNumber);
+
         seats();
         Log.i(TAG,busNumber);
         price = getIntent().getStringExtra("Price");
@@ -60,47 +60,38 @@ public class SeatSelection extends AppCompatActivity {
 
         // Back button
         backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-                startActivity(intent);
-                finish();
-            }
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), BusSelection.class);
+            startActivity(intent);
+            finish();
         });
         bookButton = findViewById(R.id.bookButton);
-        bookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (lastClickedButton != null) {
-                    selectedSeat = ("seat" + lastClickedButton.getText());
-                    Intent intent = new Intent(getApplicationContext(), Receipt.class);
-                    intent.putExtra("selectedSeat", selectedSeat);
-                    intent.putExtra("Destination", destinationText);
-                    intent.putExtra("Departure Time", departure);
-                    intent.putExtra("Price", price);
-                    intent.putExtra("Bus Number", busNumber);
-                    startActivity(intent);
-                }
+        bookButton.setOnClickListener(v -> {
+            if (lastClickedButton != null) {
+                selectedSeat = ("seat" + lastClickedButton.getText());
+                Intent intent = new Intent(getApplicationContext(), Receipt.class);
+                intent.putExtra("selectedSeat", selectedSeat);
+                intent.putExtra("Destination", destinationText);
+                intent.putExtra("Departure Time", departure);
+                intent.putExtra("Price", price);
+                intent.putExtra("Bus Number", busNumber);
+                startActivity(intent);
             }
         });
     }
 
     private void setButtonClickListener(final Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bookButton.setVisibility(View.VISIBLE);
-                if (lastClickedButton != null) {
-                    lastClickedButton.setBackgroundResource(R.drawable.available_seat);
-                }
-                if (lastClickedButton == button) {
-                    lastClickedButton = null;
-                    bookButton.setVisibility(View.INVISIBLE);
-                } else {
-                    button.setBackgroundResource(R.drawable.selected_seat_color);
-                    lastClickedButton = button;
-                }
+        button.setOnClickListener(view -> {
+            bookButton.setVisibility(View.VISIBLE);
+            if (lastClickedButton != null) {
+                lastClickedButton.setBackgroundResource(R.drawable.available_seat);
+            }
+            if (lastClickedButton == button) {
+                lastClickedButton = null;
+                bookButton.setVisibility(View.INVISIBLE);
+            } else {
+                button.setBackgroundResource(R.drawable.selected_seat_color);
+                lastClickedButton = button;
             }
         });
     }
@@ -116,19 +107,16 @@ public class SeatSelection extends AppCompatActivity {
             CollectionReference seatCollection = db.collection("Buses").document(busNumber).collection("seats");
             String seatNumber = "seat" + i;
 
-            seatCollection.document(seatNumber).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document != null && document.exists()) {
-                            // Document exists, proceed with other checks
-                            Boolean isTaken = document.getBoolean("isTaken");
+            seatCollection.document(seatNumber).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        // Document exists, proceed with other checks
+                        Boolean isTaken = document.getBoolean("isTaken");
 
-                            if (document.contains("isTaken") && isTaken != null && isTaken) {
-                                button.setBackgroundResource(R.drawable.booked_seat);
-                                button.setOnClickListener(null);
-                            }
+                        if (document.contains("isTaken") && isTaken != null && isTaken) {
+                            button.setBackgroundResource(R.drawable.booked_seat);
+                            button.setOnClickListener(null);
                         }
                     }
                 }

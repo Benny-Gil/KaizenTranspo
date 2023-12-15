@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import com.example.kaizentranspo.R;
 
+/**
+ * TO BE REMOVED
+ */
 public class RemoveBus extends AppCompatActivity {
 
     @Override

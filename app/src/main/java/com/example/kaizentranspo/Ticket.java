@@ -45,14 +45,11 @@ public class Ticket extends AppCompatActivity implements RecyclerViewInterface {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Button bookButton = findViewById(R.id.buttonBook);
-        bookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BusSelection.class);
+        bookButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), BusSelection.class);
 
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            }
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
 
         ImageButton homeButton = findViewById(R.id.homeButton);

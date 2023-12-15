@@ -1,6 +1,6 @@
 package com.example.kaizentranspo;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -60,27 +59,14 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
         busDetailsHolder.setVisibility(View.INVISIBLE);
 
         close = findViewById(R.id.closeButton);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                busDetailsHolder.setVisibility(View.INVISIBLE);
-            }
-        });
+        close.setOnClickListener(v -> busDetailsHolder.setVisibility(View.INVISIBLE));
         add = findViewById(R.id.addBusButton);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminCreateBus.class);
-                startActivity(intent);
-            }
+        add.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), AdminCreateBus.class);
+            startActivity(intent);
         });
 
     }
-/**
- *
- * Copied from the busSelection
- *
- * */
     private void setUpBus() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -124,31 +110,22 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
         price.setText(bus.get(position).getPrice());
         departureTime.setText(bus.get(position).getTime());
 
-        remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CollectionReference cf =fStore.collection("Buses");
-                String busNumberToDelete = bus.get(position).getBusNumber();
+        remove.setOnClickListener(v -> {
+            CollectionReference cf =fStore.collection("Buses");
+            String busNumberToDelete = bus.get(position).getBusNumber();
 
-                // Delete the document with the specified busNumber
-                cf.document(busNumberToDelete)
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // Document successfully deleted
-                                Toast.makeText(AdminManageBus.this, "Bus deleted successfully", Toast.LENGTH_SHORT).show();
-                                busDetailsHolder.setVisibility(View.INVISIBLE);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Handle any errors that occurred during the deletion
-                                Toast.makeText(AdminManageBus.this, "Error deleting bus: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
+            // Delete the document with the specified busNumber
+            cf.document(busNumberToDelete)
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        // Document successfully deleted
+                        Toast.makeText(AdminManageBus.this, "Bus deleted successfully", Toast.LENGTH_SHORT).show();
+                        busDetailsHolder.setVisibility(View.INVISIBLE);
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle any errors that occurred during the deletion
+                        Toast.makeText(AdminManageBus.this, "Error deleting bus: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
         });
 
     }

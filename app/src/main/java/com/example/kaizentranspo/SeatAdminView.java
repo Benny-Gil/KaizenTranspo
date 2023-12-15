@@ -62,47 +62,36 @@ public class SeatAdminView extends AppCompatActivity {
 
         // Back button
         backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(), BusSelection.class);
-                //startActivity(intent);
-                finish();
-            }
+        backButton.setOnClickListener(v -> {
+            finish();
         });
         bookButton = findViewById(R.id.bookButton);
-        bookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (lastClickedButton != null) {
-                    selectedSeat = ("seat" + lastClickedButton.getText());
-                    Intent intent = new Intent(getApplicationContext(), AdminBookingView.class);
-                    intent.putExtra("selectedSeat", selectedSeat);
-                    intent.putExtra("Destination", destinationText);
-                    intent.putExtra("Departure Time", departure);
-                    intent.putExtra("Price", price);
-                    intent.putExtra("Bus Number", busNumber);
-                    startActivity(intent);
-                }
+        bookButton.setOnClickListener(v -> {
+            if (lastClickedButton != null) {
+                selectedSeat = ("seat" + lastClickedButton.getText());
+                Intent intent = new Intent(getApplicationContext(), AdminBookingView.class);
+                intent.putExtra("selectedSeat", selectedSeat);
+                intent.putExtra("Destination", destinationText);
+                intent.putExtra("Departure Time", departure);
+                intent.putExtra("Price", price);
+                intent.putExtra("Bus Number", busNumber);
+                startActivity(intent);
             }
         });
     }
 
     private void setButtonClickListener(final Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bookButton.setVisibility(View.VISIBLE);
-                if (lastClickedButton != null) {
-                    lastClickedButton.setBackgroundResource(R.drawable.available_seat);
-                }
-                if (lastClickedButton == button) {
-                    lastClickedButton = null;
-                    bookButton.setVisibility(View.INVISIBLE);
-                } else {
-                    button.setBackgroundResource(R.drawable.selected_seat_color);
-                    lastClickedButton = button;
-                }
+        button.setOnClickListener(view -> {
+            bookButton.setVisibility(View.VISIBLE);
+            if (lastClickedButton != null) {
+                lastClickedButton.setBackgroundResource(R.drawable.available_seat);
+            }
+            if (lastClickedButton == button) {
+                lastClickedButton = null;
+                bookButton.setVisibility(View.INVISIBLE);
+            } else {
+                button.setBackgroundResource(R.drawable.selected_seat_color);
+                lastClickedButton = button;
             }
         });
     }
