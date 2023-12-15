@@ -1,5 +1,8 @@
 package com.example.kaizentranspo;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,13 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
-   EditText editTextEmail,editTextPassword;
+    EditText editTextEmail, editTextPassword;
     Button buttonLogin;
     Button buttonRegister;
     FirebaseAuth mAuth;
@@ -39,11 +46,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        fStore=FirebaseFirestore.getInstance();
-        mAuth=FirebaseAuth.getInstance();
-        editTextEmail=findViewById(R.id.registerUsername);
-        editTextPassword=findViewById(R.id.registerPassword);
-        buttonLogin=findViewById(R.id.buttonLogin);
+        fStore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        editTextEmail = findViewById(R.id.registerUsername);
+        editTextPassword = findViewById(R.id.registerPassword);
+        buttonLogin = findViewById(R.id.buttonLogin);
         buttonRegister = findViewById(R.id.buttonRegister);
 
         buttonRegister.setOnClickListener(v -> {
@@ -51,22 +58,12 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-/*this is fucking up the login button
-        // Goes to Admin Page
-        adminLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), AdminPage.class);
-            startActivity(intent);
-            finish();
-        });
 
-*/
         buttonLogin.setOnClickListener(v -> {
-            //deleteeee
-            //startActivity(new Intent(getApplicationContext(),BusSelection.class));
 
-            String email,password;
-            email=String.valueOf(editTextEmail.getText());
-            password=String.valueOf(editTextPassword.getText());
+            String email, password;
+            email = String.valueOf(editTextEmail.getText());
+            password = String.valueOf(editTextPassword.getText());
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
@@ -76,30 +73,22 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
 
             }
-            mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
-            Toast.makeText(Login.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }).addOnFailureListener(e -> Toast.makeText(Login.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show());
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(Login.this, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Login.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         });
-
-
     }
-
-//    public void checkUserAccessLevel(String uid) {
-//        DocumentReference documentReference = fStore.collection("Users").document(uid);
-//        documentReference.get().addOnSuccessListener(documentSnapshot -> {
-//            Log.d("Tag", "onSuccess: " + documentSnapshot.getData());
-//
-//            if (documentSnapshot.getString("isAdmin") != null) {
-//                startActivity(new Intent(getApplicationContext(), AdminPage.class));
-//                finish();
-//            }
-//            if (documentSnapshot.getString("isUser") != null) {
-//                startActivity(new Intent(getApplicationContext(), BusSelection.class));
-//                finish();
-//            }
-//        });
-//    }
 }
+
