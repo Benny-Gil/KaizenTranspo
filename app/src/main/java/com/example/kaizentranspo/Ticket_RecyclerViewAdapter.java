@@ -5,18 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.kaizentranspo.classes.TicketList;
-
 import java.util.ArrayList;
 
 public class Ticket_RecyclerViewAdapter extends RecyclerView.Adapter<Ticket_RecyclerViewAdapter.MyViewHolder> {
     private final RecyclerViewInterface recyclerViewInterface;
     Context context;
-    ArrayList<TicketList> ticket = new ArrayList<>();
+    ArrayList<TicketList> ticket;
 
     public Ticket_RecyclerViewAdapter(Context context, ArrayList<TicketList> ticket, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;

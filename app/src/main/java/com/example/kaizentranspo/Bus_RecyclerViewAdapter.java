@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Bus_RecyclerViewAdapter extends RecyclerView.Adapter<Bus_RecyclerViewAdapter.MyViewHolder> {
     private final RecyclerViewInterface recyclerViewInterface;
     Context context;
-    ArrayList<BusList> bus = new ArrayList<>();
+    ArrayList<BusList> bus;
 
     public Bus_RecyclerViewAdapter(Context context, ArrayList<BusList> bus, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;

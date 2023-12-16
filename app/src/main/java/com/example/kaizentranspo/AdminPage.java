@@ -9,16 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-
-import com.example.kaizentranspo.AdminManageBus;
-import com.example.kaizentranspo.BusList;
-import com.example.kaizentranspo.Bus_RecyclerViewAdapter;
-import com.example.kaizentranspo.MainActivity;
-import com.example.kaizentranspo.R;
-import com.example.kaizentranspo.RecyclerViewInterface;
-import com.example.kaizentranspo.SeatAdminView;
-import com.example.kaizentranspo.Ticket;
 import com.example.kaizentranspo.classes.DatabaseResetter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -65,13 +55,10 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
         });
 
 
-        manageBus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminManageBus.class);
-                startActivity(intent);
-                finish();
-            }
+        manageBus.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), AdminManageBus.class);
+            startActivity(intent);
+            finish();
         });
 
     }
