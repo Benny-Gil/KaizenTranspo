@@ -92,35 +92,32 @@ public class Receipt extends AppCompatActivity {
             confirmButton.setVisibility(View.INVISIBLE);
             thanks.setVisibility(View.VISIBLE);
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent12 = new Intent(getApplicationContext(), Ticket.class);
-                    //adding ticket details to database
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    DocumentReference ticketReference1 = fStore.collection("TicketCounter").document("Counter");
-                    counterValue+=1;
-                    DocumentReference documentReference = fStore.collection("Users").document(user.getUid()).collection("tickets").document(String.valueOf(counterValue));
-                    DocumentReference seatReference = fStore.collection("Buses").document(busNumber).collection("seats").document(selectedSeat);
+            new Handler().postDelayed(() -> {
+                Intent intent12 = new Intent(getApplicationContext(), Ticket.class);
+                //adding ticket details to database
+                FirebaseUser user = mAuth.getCurrentUser();
+                DocumentReference ticketReference1 = fStore.collection("TicketCounter").document("Counter");
+                counterValue+=1;
+                DocumentReference documentReference = fStore.collection("Users").document(user.getUid()).collection("tickets").document(String.valueOf(counterValue));
+                DocumentReference seatReference = fStore.collection("Buses").document(busNumber).collection("seats").document(selectedSeat);
 
-                    Map<String, Integer> counter = new HashMap<>();
-                    counter.put("Counter", counterValue);
-                    ticketReference1.set(counter);
-                    Map<String, Object> ticketInfo = new HashMap<>();
-                    ticketInfo.put("Bus Number", busNumber);
-                    ticketInfo.put("Destination", destinationText);
-                    ticketInfo.put("Departure", departure);
-                    ticketInfo.put("Selected Seat", selectedSeat);
+                Map<String, Integer> counter = new HashMap<>();
+                counter.put("Counter", counterValue);
+                ticketReference1.set(counter);
+                Map<String, Object> ticketInfo = new HashMap<>();
+                ticketInfo.put("Bus Number", busNumber);
+                ticketInfo.put("Destination", destinationText);
+                ticketInfo.put("Departure", departure);
+                ticketInfo.put("Selected Seat", selectedSeat);
 
-                    documentReference.set(ticketInfo);
+                documentReference.set(ticketInfo);
 
-                    Map<String, Object> seatUpdate = new HashMap<>();
-                    seatUpdate.put("isTaken",true);
-                    seatUpdate.put("reserverName",user.getEmail());
-                    seatReference.set(seatUpdate);
+                Map<String, Object> seatUpdate = new HashMap<>();
+                seatUpdate.put("isTaken",true);
+                seatUpdate.put("reserverName",user.getEmail());
+                seatReference.set(seatUpdate);
 
-                    startActivity(intent12);
-                }
+                startActivity(intent12);
             }, 1500);
         });
     }

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -63,6 +65,10 @@ public class BusSelection extends AppCompatActivity implements RecyclerViewInter
                 adapter.notifyItemRangeInserted(startPosition, itemCount);
             } else {
                 Exception exception = task.getException();
+                if (exception != null) {
+                    String errorMessage = "Firestore query failed: " + exception.getMessage();
+                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

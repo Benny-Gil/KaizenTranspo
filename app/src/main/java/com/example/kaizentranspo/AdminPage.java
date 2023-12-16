@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import com.example.kaizentranspo.classes.DatabaseResetter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,6 +84,10 @@ public class AdminPage extends AppCompatActivity implements RecyclerViewInterfac
                 adapter.notifyItemRangeInserted(startPosition, itemCount);
             } else {
                 Exception exception = task.getException();
+                if (exception != null) {
+                    String errorMessage = "Firestore query failed: " + exception.getMessage();
+                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

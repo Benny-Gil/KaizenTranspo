@@ -101,21 +101,18 @@ public class SeatAdminView extends AppCompatActivity {
             CollectionReference seatCollection = db.collection("Buses").document(busNumber).collection("seats");
             String seatNumber = "seat" + i;
 
-            seatCollection.document(seatNumber).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document != null && document.exists()) {
-                            // Document exists, proceed with other checks
-                            Boolean isTaken = document.getBoolean("isTaken");
+            seatCollection.document(seatNumber).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        // Document exists, proceed with other checks
+                        Boolean isTaken = document.getBoolean("isTaken");
 
-                            if (document.contains("isTaken") && isTaken != null && isTaken) {
-                                button.setBackgroundResource(R.drawable.booked_seat);
-                            }else{
-                                //else - haven't tried
-                                button.setOnClickListener(null);
-                            }
+                        if (document.contains("isTaken") && isTaken != null && isTaken) {
+                            button.setBackgroundResource(R.drawable.booked_seat);
+                        }else{
+                            //else - haven't tried
+                            button.setOnClickListener(null);
                         }
                     }
                 }

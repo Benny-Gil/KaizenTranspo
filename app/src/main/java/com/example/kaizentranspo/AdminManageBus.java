@@ -85,6 +85,10 @@ public class AdminManageBus extends AppCompatActivity implements RecyclerViewInt
                 adapter.notifyItemRangeInserted(startPosition, itemCount);
             } else {
                 Exception exception = task.getException();
+                if (exception != null) {
+                    String errorMessage = "Firestore query failed: " + exception.getMessage();
+                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

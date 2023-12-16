@@ -39,10 +39,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             textView.setText(user.getEmail());
         }
-        startButton.setOnClickListener(v -> {
-            checkUserAccessLevel(user.getUid());
-
-        });
+        startButton.setOnClickListener(v -> checkUserAccessLevel(user.getUid()));
 
         logoutButton.setOnClickListener(v -> {
 
