@@ -5,6 +5,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SeatAdminView extends AppCompatActivity {
     private Button lastClickedButton;
     private Button backButton;
-    private Button bookButton;
+    private Button infoButton;
     private String price;
     private String destinationText;
     private String departure;
@@ -27,7 +28,7 @@ public class SeatAdminView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seat_selection);
+        setContentView(R.layout.activity_seat_admin_view);
 
 
         busNumber = getIntent().getStringExtra("Bus Number");
@@ -56,8 +57,8 @@ public class SeatAdminView extends AppCompatActivity {
         backButton.setOnClickListener(v -> {
             finish();
         });
-        bookButton = findViewById(R.id.bookButton);
-        bookButton.setOnClickListener(v -> {
+        infoButton = findViewById(R.id.bookInfoButton);
+        infoButton.setOnClickListener(v -> {
             if (lastClickedButton != null) {
                 selectedSeat = ("seat" + lastClickedButton.getText());
                 Intent intent = new Intent(getApplicationContext(), AdminBookingView.class);
@@ -73,13 +74,13 @@ public class SeatAdminView extends AppCompatActivity {
 
     private void setButtonClickListener(final Button button) {
         button.setOnClickListener(view -> {
-            bookButton.setVisibility(View.VISIBLE);
+            infoButton.setVisibility(View.VISIBLE);
             if (lastClickedButton != null) {
                 lastClickedButton.setBackgroundResource(R.drawable.available_seat);
             }
             if (lastClickedButton == button) {
                 lastClickedButton = null;
-                bookButton.setVisibility(View.INVISIBLE);
+                infoButton.setVisibility(View.INVISIBLE);
             } else {
                 button.setBackgroundResource(R.drawable.selected_seat_color);
                 lastClickedButton = button;
